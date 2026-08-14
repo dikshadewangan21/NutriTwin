@@ -83,7 +83,7 @@ export default function AnalyticsView({ userProfile }) {
           Expected Weight Trend (Next 4 Weeks)
         </h3>
 
-        <div className="h-72 w-full pt-4">
+        <div className="h-64 sm:h-80 w-full pt-4 min-w-0">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" />

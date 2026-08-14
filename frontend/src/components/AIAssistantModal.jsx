@@ -61,8 +61,8 @@ export default function AIAssistantModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="glass-panel w-full max-w-2xl h-[620px] flex flex-col justify-between border-2 border-indigo-500/40 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-2 sm:p-4">
+      <div className="glass-panel w-full max-w-2xl h-[88vh] max-h-[620px] flex flex-col justify-between border-2 border-indigo-500/40 shadow-2xl overflow-hidden">
         {/* Modal Header */}
         <div className="p-4 bg-gray-900/80 border-b border-gray-800 flex justify-between items-center">
           <div className="flex items-center gap-3">

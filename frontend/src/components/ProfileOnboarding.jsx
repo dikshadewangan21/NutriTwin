@@ -266,29 +266,35 @@ export default function ProfileOnboarding({ userProfile, onProfileUpdated, onGen
       {/* 9-Step Progress Indicator (only shown on steps 1–9) */}
       {currentStep >= 1 && (
         <>
-      <div className="glass-panel p-3 flex justify-between items-center overflow-x-auto text-xs gap-1.5">
-        {steps.map((s) => {
-          const isActive = currentStep === s.num;
-          const isDone = currentStep > s.num;
-          return (
-            <div key={s.num} className="flex items-center gap-1 whitespace-nowrap">
-              <span
-                className={`w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] transition ${
-                  isDone
-                    ? 'bg-emerald-500 text-white'
-                    : isActive
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
-                    : 'bg-gray-800 text-gray-400 border border-gray-700'
-                }`}
-              >
-                {isDone ? '✓' : s.num}
-              </span>
-              <span className={`font-semibold text-[11px] ${isActive ? 'text-white' : 'text-gray-400'}`}>{s.title}</span>
-              {s.num < 9 && <ChevronRight className="w-3 h-3 text-gray-600" />}
-            </div>
-          );
-        })}
-      </div>
+          {/* Mobile step info header */}
+          <div className="flex sm:hidden items-center justify-between text-xs px-1 text-gray-400">
+            <span className="font-bold text-white">Step {currentStep} of 9: <span className="text-emerald-400">{steps.find(s => s.num === currentStep)?.title}</span></span>
+            <span>{Math.round((currentStep / 9) * 100)}% Completed</span>
+          </div>
+
+          <div className="glass-panel p-2.5 sm:p-3 flex justify-between items-center overflow-x-auto text-xs gap-1.5 no-scrollbar">
+            {steps.map((s) => {
+              const isActive = currentStep === s.num;
+              const isDone = currentStep > s.num;
+              return (
+                <div key={s.num} className="flex items-center gap-1 whitespace-nowrap shrink-0">
+                  <span
+                    className={`w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px] transition ${
+                      isDone
+                        ? 'bg-emerald-500 text-white'
+                        : isActive
+                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
+                        : 'bg-gray-800 text-gray-400 border border-gray-700'
+                    }`}
+                  >
+                    {isDone ? '✓' : s.num}
+                  </span>
+                  <span className={`font-semibold text-[11px] ${isActive ? 'text-white' : 'text-gray-400'}`}>{s.title}</span>
+                  {s.num < 9 && <ChevronRight className="w-3 h-3 text-gray-600 shrink-0" />}
+                </div>
+              );
+            })}
+          </div>
 
       {/* STEP 1: Body Details */}
       {currentStep === 1 && (

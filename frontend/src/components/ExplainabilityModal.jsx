@@ -41,8 +41,8 @@ export default function ExplainabilityModal({ foodId, isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="glass-panel w-full max-w-xl p-6 space-y-6 border-2 border-emerald-500/40 shadow-2xl">
+    <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+      <div className="glass-panel w-full max-w-xl p-4 sm:p-6 space-y-4 sm:space-y-6 border-2 border-emerald-500/40 shadow-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center border-b border-gray-800 pb-3">
           <div>
             <span className="badge badge-emerald text-[10px]">Why This Meal Was Chosen</span>

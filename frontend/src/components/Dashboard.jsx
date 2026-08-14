@@ -61,22 +61,22 @@ export default function Dashboard({ userProfile, onOpenExplain, onLogMeal, onVie
   return (
     <div className="space-y-6 max-w-7xl mx-auto px-4 pb-12">
       {/* Header Banner */}
-      <div className="glass-panel p-6 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 border-l-4 border-l-emerald-500">
+      <div className="glass-panel p-4 sm:p-6 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 border-l-4 border-l-emerald-500">
         <div className="space-y-2 z-10">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="badge badge-emerald">Smart Personal Assistant</span>
             <span className="text-xs text-gray-400">Updated today</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white leading-tight">
             Welcome back, <span className="text-emerald-400">{userProfile?.full_name || 'Fitness Enthusiast'}</span>
           </h2>
-          <p className="text-sm text-gray-300 max-w-2xl">
+          <p className="text-xs sm:text-sm text-gray-300 max-w-2xl">
             {todayData?.adaptive_adherence?.insight || "Your personal assistant is tracking your daily nutrition and organizing your ideal meal balance."}
           </p>
         </div>
 
-        <div className="flex items-center gap-3 z-10">
-          <button onClick={onViewPlanner} className="btn-primary">
+        <div className="flex items-center gap-3 z-10 w-full md:w-auto">
+          <button onClick={onViewPlanner} className="btn-primary w-full md:w-auto justify-center text-xs sm:text-sm py-2.5 px-4">
             <Sparkles className="w-4 h-4" />
             Generate 7-Day Plan
           </button>
@@ -84,49 +84,49 @@ export default function Dashboard({ userProfile, onOpenExplain, onLogMeal, onVie
       </div>
 
       {/* MY NUTRITION PROFILE Card */}
-      <div className="glass-panel p-5 border-l-4 border-l-indigo-500 space-y-3">
+      <div className="glass-panel p-4 sm:p-5 border-l-4 border-l-indigo-500 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-800 pb-2">
-          <h3 className="text-base font-bold text-white flex items-center gap-2">
-            <Dumbbell className="w-5 h-5 text-indigo-400" />
+          <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+            <Dumbbell className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 shrink-0" />
             MY NUTRITION PROFILE
           </h3>
 
           <div className="flex items-center gap-2">
-            <span className="badge badge-indigo">{healthSummary?.classified_pathway || 'General Health'}</span>
-            <button onClick={onEditProfile} className="btn-secondary py-1.5 px-3 text-xs">
+            <span className="badge badge-indigo text-[10px] sm:text-xs">{healthSummary?.classified_pathway || 'General Health'}</span>
+            <button onClick={onEditProfile} className="btn-secondary py-1 px-2.5 sm:py-1.5 sm:px-3 text-xs">
               <Edit3 className="w-3.5 h-3.5" /> Edit Profile
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3 text-xs bg-gray-900/60 p-3.5 rounded-xl">
-          <div>
-            <p className="text-gray-500">HEIGHT</p>
-            <p className="font-bold text-white">{userProfile?.height_cm ? `${userProfile.height_cm} cm` : '—'}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 sm:gap-3 text-xs bg-gray-900/60 p-3 rounded-xl min-w-0">
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">HEIGHT</p>
+            <p className="font-bold text-white truncate">{userProfile?.height_cm ? `${userProfile.height_cm} cm` : '—'}</p>
           </div>
-          <div>
-            <p className="text-gray-500">WEIGHT</p>
-            <p className="font-bold text-white">{userProfile?.current_weight_kg ? `${userProfile.current_weight_kg} kg` : '—'}</p>
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">WEIGHT</p>
+            <p className="font-bold text-white truncate">{userProfile?.current_weight_kg ? `${userProfile.current_weight_kg} kg` : '—'}</p>
           </div>
-          <div>
-            <p className="text-gray-500">TARGET</p>
-            <p className="font-bold text-indigo-300">{userProfile?.target_weight_kg ? `${userProfile.target_weight_kg} kg` : '—'}</p>
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">TARGET</p>
+            <p className="font-bold text-indigo-300 truncate">{userProfile?.target_weight_kg ? `${userProfile.target_weight_kg} kg` : '—'}</p>
           </div>
-          <div>
-            <p className="text-gray-500">GOAL</p>
-            <p className="font-bold text-emerald-400">{userProfile?.fitness_goal ? userProfile.fitness_goal.replace('_', ' ').toUpperCase() : 'HEALTH'}</p>
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">GOAL</p>
+            <p className="font-bold text-emerald-400 truncate">{userProfile?.fitness_goal ? userProfile.fitness_goal.replace('_', ' ').toUpperCase() : 'HEALTH'}</p>
           </div>
-          <div>
-            <p className="text-gray-500">GYM / ACTIVITY</p>
-            <p className="font-bold text-white">{healthSummary?.workout_type || (userProfile?.activity_level ? userProfile.activity_level.replace('_', ' ').toUpperCase() : 'MODERATE')}</p>
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">GYM / ACTIVITY</p>
+            <p className="font-bold text-white truncate">{healthSummary?.workout_type || (userProfile?.activity_level ? userProfile.activity_level.replace('_', ' ').toUpperCase() : 'MODERATE')}</p>
           </div>
-          <div>
-            <p className="text-gray-500">DIET</p>
-            <p className="font-bold text-indigo-300">{(userProfile?.dietary_preference || healthSummary?.dietary_preference || 'FLEXIBLE').toUpperCase()}</p>
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">DIET</p>
+            <p className="font-bold text-indigo-300 truncate">{(userProfile?.dietary_preference || healthSummary?.dietary_preference || 'FLEXIBLE').toUpperCase()}</p>
           </div>
-          <div>
-            <p className="text-gray-500">HEALTH</p>
-            <p className="font-bold text-rose-300">
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">HEALTH</p>
+            <p className="font-bold text-rose-300 truncate">
               {healthSummary?.selected_conditions?.filter(c => c && c !== 'none')?.length > 0
                 ? healthSummary.selected_conditions.filter(c => c && c !== 'none').join(', ')
                 : (userProfile?.medical_conditions?.filter(c => c && c !== 'none')?.length > 0
@@ -134,9 +134,9 @@ export default function Dashboard({ userProfile, onOpenExplain, onLogMeal, onVie
                   : 'General Health')}
             </p>
           </div>
-          <div>
-            <p className="text-gray-500">BUDGET</p>
-            <p className="font-bold text-cyan-400">₹{userProfile?.daily_budget_inr || healthSummary?.daily_budget_inr || 250}/day</p>
+          <div className="min-w-0">
+            <p className="text-gray-500 text-[10px] sm:text-xs">BUDGET</p>
+            <p className="font-bold text-cyan-400 truncate">₹{userProfile?.daily_budget_inr || healthSummary?.daily_budget_inr || 250}/day</p>
           </div>
         </div>
       </div>
