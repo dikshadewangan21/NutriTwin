@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
+from typing import List, Optional, Dict, Any
+from datetime import date
 
 from app.database import get_db
 from app.models.user import User, UserProfile
-from app.models.food import FoodItem
+from app.models.food import FoodItem, SubstitutionRule
 from app.models.log import DailyIntakeLog
 from app.api.auth import get_current_user
 from app.services.rag_assistant import rag_assistant
@@ -13,6 +15,7 @@ router = APIRouter(prefix="/assistant", tags=["Grounded RAG AI Nutrition Assista
 
 class ChatRequest(BaseModel):
     query: str
+    history: Optional[List[Dict[str, Any]]] = []
 
 @router.post("/chat")
 def chat_with_nutrition_assistant(
@@ -24,13 +27,21 @@ def chat_with_nutrition_assistant(
     if not profile:
         raise HTTPException(status_code=400, detail="Please complete profile onboarding first.")
 
-    today_str = "2026-08-08"
+    today_str = date.today().isoformat()
     intake = db.query(DailyIntakeLog).filter(
         DailyIntakeLog.user_id == current_user.id,
         DailyIntakeLog.log_date == today_str
     ).first()
 
     all_foods = db.query(FoodItem).all()
+    sub_rules = db.query(SubstitutionRule).all()
 
-    res = rag_assistant.process_chat_query(req.query, profile, intake, all_foods)
+    res = rag_assistant.process_chat_query(
+        user_query=req.query,
+        user_profile=profile,
+        daily_intake=intake,
+        food_items=all_foods,
+        substitution_rules=sub_rules,
+        chat_history=req.history
+    )
     return res
