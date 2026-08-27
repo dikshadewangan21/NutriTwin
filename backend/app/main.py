@@ -20,12 +20,12 @@ app = FastAPI(
     description="NutriTwin – Adaptive AI Nutrition & Health Intelligence Platform API"
 )
 
-# Set CORS
+# Set CORS restricted to configured trusted origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.ALLOWED_CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 

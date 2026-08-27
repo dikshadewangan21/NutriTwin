@@ -1,26 +1,26 @@
 {
   "evaluation_type": "SYNTHETIC SIMULATION BENCHMARK — Real Interaction Volume Insufficient (< 1000)",
   "disclaimer": "This benchmark is a synthetic simulation for algorithmic validation. It does NOT represent real-world production performance metrics.",
-  "real_database_interactions": 8,
-  "simulation_steps": 1000,
-  "num_arms": 10,
+  "real_database_interactions": 29,
+  "simulation_steps": 100,
+  "num_arms": 5,
   "results": {
     "random_policy": {
-      "total_cumulative_reward": 651.94,
-      "mean_reward_per_step": 0.6519
+      "total_cumulative_reward": 67.14,
+      "mean_reward_per_step": 0.6714
     },
     "greedy_policy": {
-      "total_cumulative_reward": 873.8,
-      "mean_reward_per_step": 0.8738
+      "total_cumulative_reward": 82.75,
+      "mean_reward_per_step": 0.8275
     },
     "linucb_policy": {
-      "total_cumulative_reward": 871.96,
-      "mean_reward_per_step": 0.872,
+      "total_cumulative_reward": 81.77,
+      "mean_reward_per_step": 0.8177,
       "alpha_exploration": 0.5
     }
   },
   "simulation_summary": {
-    "linucb_vs_random_improvement_pct": 33.75,
+    "linucb_vs_random_improvement_pct": 21.79,
     "conclusion": "LinUCB contextual bandit demonstrates superior cumulative reward trajectory over random and greedy baselines in synthetic simulation."
   }
 }
