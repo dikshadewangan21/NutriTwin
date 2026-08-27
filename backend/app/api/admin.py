@@ -25,8 +25,7 @@ def get_model_evaluation_metrics(
         {"model_name": "HybridRecommender", "metric_name": "precision_at_k", "value": 0.885, "target": "> 0.80"},
         {"model_name": "HybridRecommender", "metric_name": "ndcg_at_k", "value": 0.912, "target": "> 0.85"},
         {"model_name": "HybridRecommender", "metric_name": "hit_rate", "value": 0.940, "target": "> 0.90"},
-        {"model_name": "ProgressPredictor", "metric_name": "mae_kg", "value": 0.28, "target": "< 0.50 kg"},
-        {"model_name": "ProgressPredictor", "metric_name": "r2_score", "value": 0.935, "target": "> 0.85"},
+        {"model_name": "ProgressPredictor", "metric_name": "status", "value": "NOT EVALUATED — insufficient real data", "target": "Longitudinal Data Required"},
         {"model_name": "PuLPOptimizer", "metric_name": "constraint_satisfaction_pct", "value": 99.4, "target": "100.0%"}
     ]
 

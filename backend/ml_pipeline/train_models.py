@@ -1,7 +1,6 @@
 import os
 import joblib
 from ml_pipeline.train_nhanes_clustering import train_nhanes_clustering
-from app.ml.progress_predictor import progress_predictor
 from app.config import settings
 
 def main():
@@ -17,10 +16,8 @@ def main():
     joblib.dump(kmeans_model, os.path.join(settings.MODEL_DIR, "kmeans_user_cluster.joblib"))
     joblib.dump(scaler, os.path.join(settings.MODEL_DIR, "scaler_user_cluster.joblib"))
     
-    # 2. Fit Random Forest Progress Predictor
-    progress_predictor._fit_baseline()
-    print(" -> Progress Forecasting Random Forest Model Trained.")
-    joblib.dump(progress_predictor.rf_model, os.path.join(settings.MODEL_DIR, "rf_progress_predictor.joblib"))
+    # 2. Progress Predictor (Phase 6 Audit)
+    print(" -> Progress Forecasting (Phase 6): SKIPPED / NOT EVALUATED (insufficient longitudinal weight & calorie intake dataset).")
     
     print(f"[NutriTwin ML Pipeline] Successfully saved model artifacts in {settings.MODEL_DIR}")
 

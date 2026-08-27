@@ -1,11 +1,11 @@
 {
-  "exported_at": "2026-08-26T21:15:35.363584",
+  "exported_at": "2026-08-27T21:54:28.561336",
   "output_csv": "C:\\Users\\dewan\\Downloads\\Diet Recommendation\\backend\\ml_pipeline\\datasets\\interactions\\user_meal_interactions.csv",
-  "total_logged_interactions": 16,
+  "total_logged_interactions": 2,
   "interaction_counts": {
-    "shown": 16,
-    "clicked": 16,
-    "consumed": 16,
+    "shown": 2,
+    "clicked": 2,
+    "consumed": 2,
     "skipped": 0,
     "swapped": 0
   },

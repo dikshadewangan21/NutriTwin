@@ -37,3 +37,14 @@ def test_adaptive_feedback_weights():
     
     # Moong Dal Chela should now be ranked #1 above Oats
     assert updated[0]["food"].id == 2
+
+def test_progress_predictor_insufficient_data():
+    class MockUserProfile:
+        current_weight_kg = 70.0
+        target_weight_kg = 65.0
+
+    res = progress_predictor.predict_4week_progress(MockUserProfile())
+    assert res["status"] == "insufficient_data"
+    assert res["weekly_forecast"] == []
+    assert res["goal_achievement_probability_pct"] is None
+
