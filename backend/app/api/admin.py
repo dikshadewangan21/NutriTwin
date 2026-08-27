@@ -22,9 +22,7 @@ def get_model_evaluation_metrics(
     metrics = [
         {"model_name": "KMeansClustering", "metric_name": "silhouette_score", "value": cluster_eval["silhouette_score"], "target": "> 0.50"},
         {"model_name": "KMeansClustering", "metric_name": "davies_bouldin_index", "value": cluster_eval["davies_bouldin_index"], "target": "< 1.0"},
-        {"model_name": "HybridRecommender", "metric_name": "precision_at_k", "value": 0.885, "target": "> 0.80"},
-        {"model_name": "HybridRecommender", "metric_name": "ndcg_at_k", "value": 0.912, "target": "> 0.85"},
-        {"model_name": "HybridRecommender", "metric_name": "hit_rate", "value": 0.940, "target": "> 0.90"},
+        {"model_name": "CollaborativeFiltering", "metric_name": "status", "value": "NOT EVALUATED — insufficient real data", "target": ">= 1000 Real User Interactions Required"},
         {"model_name": "ProgressPredictor", "metric_name": "status", "value": "NOT EVALUATED — insufficient real data", "target": "Longitudinal Data Required"},
         {"model_name": "PuLPOptimizer", "metric_name": "constraint_satisfaction_pct", "value": 99.4, "target": "100.0%"}
     ]

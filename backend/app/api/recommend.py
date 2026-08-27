@@ -166,17 +166,24 @@ def log_user_interaction(
     if not food:
         raise HTTPException(status_code=404, detail="Food item not found.")
 
+    rating_val = None
+    if req.rating is not None:
+        try:
+            rating_val = float(min(5.0, max(1.0, float(req.rating))))
+        except (ValueError, TypeError):
+            rating_val = None
+
     interaction = RecommendationInteraction(
         user_id=current_user.id,
         food_id=req.food_id,
         timestamp=datetime.utcnow(),
-        shown=req.shown,
-        clicked=req.clicked,
-        consumed=req.consumed,
-        skipped=req.skipped,
-        swapped=req.swapped,
-        rating=req.rating,
-        context=req.context
+        shown=bool(req.shown),
+        clicked=bool(req.clicked),
+        consumed=bool(req.consumed),
+        skipped=bool(req.skipped),
+        swapped=bool(req.swapped),
+        rating=rating_val,
+        context=req.context or {}
     )
     db.add(interaction)
     db.commit()

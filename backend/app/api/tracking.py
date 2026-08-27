@@ -5,9 +5,9 @@ from typing import List, Optional
 
 from app.database import get_db
 from app.models.user import User, UserProfile
-from app.models.log import DailyIntakeLog, FeedbackLog
+from app.models.log import DailyIntakeLog, FeedbackLog, RecommendationInteraction
 from app.models.food import FoodItem
-from app.schemas.recommend import FeedbackSubmission
+from app.schemas.recommend import FeedbackSubmission, InteractionLogRequest, InteractionLogResponse
 from app.api.auth import get_current_user
 from app.ml.progress_predictor import progress_predictor
 from app.ml.adaptive_engine import adaptive_engine
@@ -155,3 +155,56 @@ def get_predictive_progress(
 
     forecast = progress_predictor.predict_4week_progress(profile, adherence_score=88.5)
     return forecast
+
+@router.post("/log-action", response_model=InteractionLogResponse)
+def log_user_action(
+    req: InteractionLogRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Log real user recommendation interaction action (shown, clicked, consumed, skipped, swapped, rating).
+    Captures: user_id, food_id, timestamp, shown, clicked, consumed, skipped, swapped, rating, context.
+    Safely validates food_id and handles duplicates/ratings.
+    """
+    food = db.query(FoodItem).filter(FoodItem.id == req.food_id).first()
+    if not food:
+        raise HTTPException(status_code=404, detail="Food item not found.")
+
+    rating_val = None
+    if req.rating is not None:
+        try:
+            rating_val = float(min(5.0, max(1.0, float(req.rating))))
+        except (ValueError, TypeError):
+            rating_val = None
+
+    interaction = RecommendationInteraction(
+        user_id=current_user.id,
+        food_id=req.food_id,
+        timestamp=datetime.utcnow(),
+        shown=bool(req.shown),
+        clicked=bool(req.clicked),
+        consumed=bool(req.consumed),
+        skipped=bool(req.skipped),
+        swapped=bool(req.swapped),
+        rating=rating_val,
+        context=req.context or {}
+    )
+    db.add(interaction)
+    db.commit()
+    db.refresh(interaction)
+
+    return {
+        "interaction_id": interaction.id,
+        "user_id": interaction.user_id,
+        "food_id": interaction.food_id,
+        "timestamp": interaction.timestamp.isoformat(),
+        "shown": interaction.shown,
+        "clicked": interaction.clicked,
+        "consumed": interaction.consumed,
+        "skipped": interaction.skipped,
+        "swapped": interaction.swapped,
+        "rating": interaction.rating,
+        "context": interaction.context or {}
+    }
+

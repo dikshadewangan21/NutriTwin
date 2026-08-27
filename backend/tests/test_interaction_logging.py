@@ -12,6 +12,7 @@ from app.models.food import FoodItem
 from app.models.log import RecommendationInteraction
 from app.api.auth import create_access_token, get_current_user
 from ml_pipeline.export_interactions import export_user_meal_interactions, CSV_OUT_PATH, REPORT_OUT_PATH
+from ml_pipeline.train_recommender import train_collaborative_recommender
 
 Base.metadata.create_all(bind=engine)
 
@@ -106,6 +107,50 @@ def test_post_interaction_api_endpoint():
     assert data["rating"] == 5.0
 
 
+def test_post_tracking_log_action_endpoint():
+    """Test POST /api/v1/tracking/log-action REST API endpoint."""
+    uid, email = get_test_user()
+    token = create_access_token(user_id=uid, email=email)
+    headers = {"Authorization": f"Bearer {token}"}
+
+    payload = {
+        "food_id": 1,
+        "shown": True,
+        "clicked": True,
+        "consumed": False,
+        "skipped": False,
+        "swapped": True,
+        "rating": 4.0,
+        "context": {"meal_type": "snack", "action": "swap"}
+    }
+
+    res = client.post("/api/v1/tracking/log-action", headers=headers, json=payload)
+    assert res.status_code == 200, f"Tracking log-action endpoint failed: {res.text}"
+
+    data = res.json()
+    assert "interaction_id" in data
+    assert data["user_id"] > 0
+    assert data["food_id"] == 1
+    assert data["swapped"] is True
+    assert data["rating"] == 4.0
+
+
+def test_invalid_food_id_interaction_returns_404():
+    """Verify that interaction endpoint safely handles invalid food_id by returning 404."""
+    uid, email = get_test_user()
+    token = create_access_token(user_id=uid, email=email)
+    headers = {"Authorization": f"Bearer {token}"}
+
+    payload = {
+        "food_id": 999999, # Invalid food_id
+        "shown": True
+    }
+
+    res = client.post("/api/v1/tracking/log-action", headers=headers, json=payload)
+    assert res.status_code == 404
+    assert "food item not found" in res.json()["detail"].lower()
+
+
 def test_export_interactions_pipeline():
     """Verify export_interactions pipeline exports database records to CSV."""
     df = export_user_meal_interactions()
@@ -125,3 +170,14 @@ def test_export_interactions_pipeline():
     assert "context_json" in df.columns
 
     assert len(df) >= 2
+
+
+def test_train_recommender_gated_when_under_1000():
+    """Verify train_recommender.py gates CF training when real interactions < 1000."""
+    res = train_collaborative_recommender()
+
+    assert res["status"] == "NOT EVALUATED — insufficient real data"
+    assert res["is_trained"] is False
+    assert res["required_interaction_count"] == 1000
+    assert res["table_used"] == "recommendation_interactions"
+    assert res["real_interaction_count"] >= 2
