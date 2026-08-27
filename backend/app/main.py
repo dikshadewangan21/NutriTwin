@@ -68,7 +68,21 @@ def seed_database_if_empty():
                 )
                 db.add(cond)
             db.commit()
-            print(f"[NutriTwin Startup] Seeded {len(HEALTH_CONDITION_MASTER_DATA)} Master Health Conditions.")
+        demo_user = db.query(User).filter(User.email == "demo@nutritwin.ai").first()
+        if not demo_user:
+            from app.api.auth import hash_password
+            from app.services.profile_service import get_or_create_user_profile
+            demo_user = User(
+                email="demo@nutritwin.ai",
+                hashed_password=hash_password("DemoPassword123!"),
+                full_name="NutriTwin Demo User",
+                is_admin=False
+            )
+            db.add(demo_user)
+            db.commit()
+            db.refresh(demo_user)
+            get_or_create_user_profile(demo_user.id, db)
+            print("[NutriTwin Startup] Seeded default Demo User.")
 
     except Exception as e:
         print(f"[NutriTwin Startup Error] {e}")

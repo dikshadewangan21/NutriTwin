@@ -40,15 +40,15 @@ def _health_aware_explanation(food, day_name, meal_type, conditions, pathway):
     return f"{base}{condition_note}"
 
 
+from app.services.profile_service import get_or_create_user_profile
+
 @router.post("/7-day-plan")
 def generate_optimized_7day_plan(
     req: OptimizeMealPlanRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    profile = db.query(UserProfile).filter(UserProfile.user_id == current_user.id).first()
-    if not profile:
-        raise HTTPException(status_code=400, detail="Please complete profile onboarding first.")
+    profile = get_or_create_user_profile(current_user.id, db)
 
     # Load health profile for disease-aware constraints
     health_prof = db.query(UserHealthProfile).filter(UserHealthProfile.user_id == current_user.id).first()

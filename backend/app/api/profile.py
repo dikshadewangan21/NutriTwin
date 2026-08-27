@@ -61,14 +61,14 @@ def create_or_update_profile(
 
     return profile
 
+from app.services.profile_service import get_or_create_user_profile
+
 @router.get("/me", response_model=UserProfileResponse)
 def get_user_profile(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    profile = db.query(UserProfile).filter(UserProfile.user_id == current_user.id).first()
-    if not profile:
-        raise HTTPException(status_code=440, detail="Profile not onboarded yet.")
+    profile = get_or_create_user_profile(current_user.id, db)
     return profile
 
 @router.get("/cluster-info")
