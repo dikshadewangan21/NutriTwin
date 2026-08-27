@@ -229,6 +229,29 @@ def evaluate_all() -> Dict[str, Any]:
     report_data["models"]["collaborative_recommender"] = recommender_res
 
     # -------------------------------------------------------------------------
+    # 7. Adaptive Learning Engine (LinUCB Contextual Bandit — Phase 8)
+    # -------------------------------------------------------------------------
+    print("\n7. ADAPTIVE LEARNING ENGINE (LINUCB CONTEXTUAL BANDIT — PHASE 8)")
+    linucb_sim_path = PROCESSED_DIR / "linucb_simulation_report.json"
+    if linucb_sim_path.exists():
+        with open(linucb_sim_path, "r", encoding="utf-8") as f:
+            lin_sim = json.load(f)
+        lin_res = {
+            "status": "SIMULATION BENCHMARK",
+            "evaluation_type": lin_sim.get("evaluation_type"),
+            "disclaimer": lin_sim.get("disclaimer"),
+            "real_interaction_count": lin_sim.get("real_database_interactions", 8),
+            "results": lin_sim.get("results")
+        }
+        print("   • Status: SIMULATION BENCHMARK (Real interactions < 1000)")
+        print(f"   • LinUCB vs Random Gain: +{lin_sim.get('simulation_summary', {}).get('linucb_vs_random_improvement_pct')}%")
+    else:
+        lin_res = {"status": "SIMULATION BENCHMARK — Pending execution"}
+        print("   • Status: SIMULATION BENCHMARK — Pending execution")
+
+    report_data["models"]["linucb_adaptive_engine"] = lin_res
+
+    # -------------------------------------------------------------------------
     # Save Final JSON & CSV Evaluation Reports
     # -------------------------------------------------------------------------
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)

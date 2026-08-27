@@ -1,6 +1,6 @@
 {
   "status": "NOT EVALUATED — insufficient real data",
-  "real_interaction_count": 5,
+  "real_interaction_count": 8,
   "required_interaction_count": 1000,
   "table_used": "recommendation_interactions",
   "is_trained": false,

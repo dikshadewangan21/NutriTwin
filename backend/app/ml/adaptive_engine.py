@@ -1,81 +1,214 @@
 import numpy as np
-from datetime import datetime, timedelta
+from datetime import datetime
+from typing import Dict, Any, List, Optional
+
+def action_to_reward(action_type: Optional[str], rating: Optional[float] = None) -> float:
+    """
+    Converts real user interaction action or explicit rating into a continuous reward signal r in [-1.0, +1.0].
+    
+    Reward mappings:
+      - skipped  : -1.0
+      - swapped  : -0.5
+      - consumed : +0.5
+      - rating 5 : +1.0
+      - rating 4 : +0.7
+      - rating 3 : +0.3
+      - rating 2 : -0.5
+      - rating 1 : -1.0
+    """
+    if rating is not None:
+        try:
+            r_val = float(rating)
+            if r_val >= 4.5:
+                return 1.0
+            elif r_val >= 3.5:
+                return 0.7
+            elif r_val >= 2.5:
+                return 0.3
+            elif r_val >= 1.5:
+                return -0.5
+            else:
+                return -1.0
+        except (ValueError, TypeError):
+            pass
+
+    act = (action_type or "").lower().strip()
+    if act == "skipped":
+        return -1.0
+    elif act == "swapped":
+        return -0.5
+    elif act == "consumed":
+        return 0.5
+    elif act in ["rated", "rating"]:
+        return 0.5
+    return 0.0
+
+
+class LinUCBArmModel:
+    """
+    LinUCB Single-Arm Contextual Multi-Armed Bandit Implementation (Li et al., 2010).
+    
+    Maintains d-dimensional feature space parameter matrix A_a in R^(d x d) (initialized to I_d)
+    and response vector b_a in R^d (initialized to 0_d).
+    """
+    def __init__(self, d: int = 6, alpha: float = 0.5):
+        self.d = d
+        self.alpha = alpha
+        self.A = np.eye(d, dtype=float)
+        self.b = np.zeros(d, dtype=float)
+
+    @property
+    def theta(self) -> np.ndarray:
+        """Compute estimated coefficient parameter vector theta = A^(-1) * b."""
+        try:
+            return np.linalg.solve(self.A, self.b)
+        except np.linalg.LinAlgError:
+            return np.linalg.pinv(self.A) @ self.b
+
+    def predict_ucb(self, x: np.ndarray) -> float:
+        """
+        Compute predicted Upper Confidence Bound score for feature vector x:
+            score = theta^T * x + alpha * sqrt(x^T * A^(-1) * x)
+        """
+        x = np.asarray(x, dtype=float).reshape(-1)
+        if len(x) != self.d:
+            x_fixed = np.ones(self.d, dtype=float)
+            x_fixed[:min(len(x), self.d)] = x[:min(len(x), self.d)]
+            x = x_fixed
+
+        try:
+            A_inv_x = np.linalg.solve(self.A, x)
+        except np.linalg.LinAlgError:
+            A_inv_x = np.linalg.pinv(self.A) @ x
+
+        expected_reward = float(np.dot(self.theta, x))
+        variance = float(np.dot(x, A_inv_x))
+        std_dev = np.sqrt(max(0.0, variance))
+        
+        ucb_score = expected_reward + self.alpha * std_dev
+        return ucb_score
+
+    def update(self, x: np.ndarray, reward: float):
+        """
+        Update LinUCB parameters with feedback pair (context x, reward r):
+            A <- A + x * x^T
+            b <- b + r * x
+        """
+        x = np.asarray(x, dtype=float).reshape(-1)
+        if len(x) != self.d:
+            x_fixed = np.ones(self.d, dtype=float)
+            x_fixed[:min(len(x), self.d)] = x[:min(len(x), self.d)]
+            x = x_fixed
+
+        self.A += np.outer(x, x)
+        self.b += float(reward) * x
+
+
+LinUCBModel = LinUCBArmModel
+
 
 class AdaptiveLearningEngine:
     """
-    Contextual Multi-Armed Bandit & EWMA Online Behavioral Learning Engine.
-    Dynamically learns user meal preferences, adherence trends, and skip patterns.
+    Disjoint LinUCB Contextual Multi-Armed Bandit & EWMA Online Behavioral Learning Engine.
+    Dynamically learns user meal preferences, adherence trends, and skip patterns using LinUCB.
     """
-    def __init__(self, alpha=0.3):
-        self.alpha = alpha # Learning rate for exponential decay
+    def __init__(self, alpha: float = 0.5, d: int = 6):
+        self.alpha = alpha
+        self.d = d
+        self.arm_models: Dict[int, LinUCBArmModel] = {}
+        self.global_model = LinUCBArmModel(d=d, alpha=alpha)
 
-    def update_item_weights(self, food_id_scores, feedback_logs):
+    def _get_arm_model(self, food_id: int) -> LinUCBArmModel:
+        """Get or initialize Disjoint LinUCB model for specific food item (arm)."""
+        if food_id not in self.arm_models:
+            self.arm_models[food_id] = LinUCBArmModel(d=self.d, alpha=self.alpha)
+        return self.arm_models[food_id]
+
+    def extract_context_vector(self, item: Dict[str, Any], profile=None) -> np.ndarray:
+        """Construct 6-dimensional contextual feature vector from item breakdown and user profile."""
+        base_score = float(item.get("score", 0.5))
+        bd = item.get("breakdown", {})
+        macro_fit = float(bd.get("macro_fit", base_score))
+        pref_fit = float(bd.get("preference_fit", 0.5))
+        budget_fit = float(bd.get("budget_fit", 0.5))
+        div_fit = float(bd.get("diversity_score", 0.5))
+        bias = 1.0
+        return np.array([base_score, macro_fit, pref_fit, budget_fit, div_fit, bias], dtype=float)
+
+    def update_item_weights(self, food_id_scores: List[Dict[str, Any]], feedback_logs=None) -> List[Dict[str, Any]]:
         """
-        Adjust food recommendation scores dynamically using exponential decay weighting
-        from user interactions (skips, consumptions, ratings, swaps).
+        Dynamically adjusts food recommendation scores using LinUCB contextual bandit model.
+        Updates arm parameters on real feedback_logs if provided, then re-ranks items by predicted UCB.
+        Preserves full backward compatibility with existing API response schemas.
         """
-        if not feedback_logs:
-            return food_id_scores
+        if not food_id_scores:
+            return []
 
-        food_stats = {}
-        for log in feedback_logs:
-            fid = log.food_id
-            if fid not in food_stats:
-                food_stats[fid] = {"skips": 0, "consumes": 0, "swaps": 0, "ratings": []}
-            
-            act = log.action_type
-            if act == "skipped":
-                food_stats[fid]["skips"] += 1
-            elif act == "consumed":
-                food_stats[fid]["consumes"] += 1
-            elif act == "swapped":
-                food_stats[fid]["swaps"] += 1
-            
-            if log.rating is not None:
-                food_stats[fid]["ratings"].append(log.rating)
+        # 1. Update LinUCB parameters from real interaction feedback logs if provided
+        if feedback_logs:
+            item_context_map = {}
+            for item in food_id_scores:
+                food_obj = item.get("food")
+                fid = getattr(food_obj, "id", None) if food_obj else None
+                if fid is None and isinstance(item, dict):
+                    fid = item.get("food_id")
+                if fid is not None:
+                    item_context_map[fid] = self.extract_context_vector(item)
 
-        adjusted_scores = {}
+            for log in feedback_logs:
+                if isinstance(log, dict):
+                    fid = log.get("food_id")
+                    act = log.get("action_type")
+                    r_val = log.get("rating")
+                else:
+                    fid = getattr(log, "food_id", None)
+                    act = getattr(log, "action_type", None)
+                    r_val = getattr(log, "rating", None)
+
+                if fid is not None:
+                    reward = action_to_reward(act, r_val)
+                    x_feed = item_context_map.get(fid, np.array([0.7, 0.7, 0.7, 0.7, 0.7, 1.0], dtype=float))
+                    arm = self._get_arm_model(fid)
+                    arm.update(x_feed, reward)
+                    self.global_model.update(x_feed, reward)
+
+        # 2. Compute LinUCB scores for candidate items
+        adjusted_scores = []
         for item in food_id_scores:
-            fid = item["food"].id
-            base_score = item["score"]
-            
-            if fid in food_stats:
-                stats = food_stats[fid]
-                skips = stats["skips"]
-                consumes = stats["consumes"]
-                swaps = stats["swaps"]
-                ratings = stats["ratings"]
-                
-                # Calculate adaptation multiplier
-                mult = 1.0
-                
-                # Penalty for skips & swaps
-                if skips > 0:
-                    mult -= min(0.60, 0.25 * skips)
-                if swaps > 0:
-                    mult -= min(0.30, 0.15 * swaps)
-                    
-                # Reward for consumption
-                if consumes > 0:
-                    mult += min(0.35, 0.10 * consumes)
-                    
-                # Reward/Penalty for explicit ratings
-                if ratings:
-                    avg_r = sum(ratings) / len(ratings)
-                    mult += (avg_r - 3.0) * 0.12
-                    
-                final_score = base_score * max(0.1, mult)
-                item_copy = dict(item)
-                item_copy["score"] = round(float(final_score), 4)
-                item_copy["adaptive_multiplier"] = round(float(mult), 2)
-                item_copy["breakdown"]["adaptive_feedback"] = round(float(mult), 2)
-                adjusted_scores[fid] = item_copy
+            item_copy = dict(item)
+            if "breakdown" in item_copy and isinstance(item_copy["breakdown"], dict):
+                item_copy["breakdown"] = dict(item_copy["breakdown"])
             else:
-                adjusted_scores[fid] = item
+                item_copy["breakdown"] = {}
 
-        res = list(adjusted_scores.values())
-        res.sort(key=lambda x: x["score"], reverse=True)
-        return res
+            food_obj = item.get("food")
+            fid = getattr(food_obj, "id", None) if food_obj else None
+            if fid is None and isinstance(item, dict):
+                fid = item.get("food_id")
+
+            x_ctx = self.extract_context_vector(item_copy)
+            base_s = float(item.get("score", 0.5))
+
+            if fid is not None and fid in self.arm_models:
+                arm = self.arm_models[fid]
+                ucb_val = arm.predict_ucb(x_ctx)
+                mult = max(0.1, 1.0 + ucb_val)
+            else:
+                ucb_val = 0.0
+                mult = 1.0
+
+            final_s = round(float(np.clip(base_s * mult, 0.05, 1.0)), 4)
+            mult_rounded = round(float(mult), 2)
+
+            item_copy["score"] = final_s
+            item_copy["adaptive_multiplier"] = mult_rounded
+            item_copy["breakdown"]["adaptive_feedback"] = mult_rounded
+            item_copy["breakdown"]["linucb_score"] = round(float(ucb_val), 4)
+
+            adjusted_scores.append(item_copy)
+
+        adjusted_scores.sort(key=lambda x: x["score"], reverse=True)
+        return adjusted_scores
 
     def compute_adherence_trend(self, daily_intake_logs, target_calories):
         """Compute rolling 7-day adherence trend percentage and calorie consistency score."""

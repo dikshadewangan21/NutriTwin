@@ -1,5 +1,5 @@
 {
-  "evaluation_timestamp": "2026-08-28T03:28:52.242135",
+  "evaluation_timestamp": "2026-08-28T03:35:54.161513",
   "models": {
     "kmeans_user_clustering": {
       "status": "EVALUATED",
@@ -52,6 +52,27 @@
     "collaborative_recommender": {
       "status": "NOT EVALUATED — insufficient real data",
       "reason": "Real interaction logging active in database (user_meal_interactions.csv); collaborative filtering model training gated until >= 1000 real user interactions accumulate in production."
+    },
+    "linucb_adaptive_engine": {
+      "status": "SIMULATION BENCHMARK",
+      "evaluation_type": "SYNTHETIC SIMULATION BENCHMARK — Real Interaction Volume Insufficient (< 1000)",
+      "disclaimer": "This benchmark is a synthetic simulation for algorithmic validation. It does NOT represent real-world production performance metrics.",
+      "real_interaction_count": 8,
+      "results": {
+        "random_policy": {
+          "total_cumulative_reward": 651.94,
+          "mean_reward_per_step": 0.6519
+        },
+        "greedy_policy": {
+          "total_cumulative_reward": 873.8,
+          "mean_reward_per_step": 0.8738
+        },
+        "linucb_policy": {
+          "total_cumulative_reward": 871.96,
+          "mean_reward_per_step": 0.872,
+          "alpha_exploration": 0.5
+        }
+      }
     }
   }
 }
