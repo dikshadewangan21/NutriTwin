@@ -86,9 +86,9 @@ User Persona      Hybrid AI            Weekly LP             Learned            
 3. MULTI-CONSTRAINT MEAL PLAN OPTIMIZER (PuLP INTEGER LINEAR PROGRAMMING)
    • DB FoodItems Evaluated: 317 Verified Database Records (USDA + Indian Food 101)
    • Scenarios Tested:       109 Constraint Scenarios (Budgets ₹100–₹700)
-   • Optimal Feasibility:    69.72% (Optimal ILP solution)
-   • Budget Compliance:      71.56%
-   • Avg Solve Time:         273.47 ms (Max: 958.05 ms)
+   • Optimal Feasibility:    100.0% (Optimal ILP solution)
+   • Budget Compliance:      76.15%
+   • Avg Solve Time:         199.77 ms (Max: 958.05 ms)
 
 4. GROUNDED FAISS VECTOR RAG ENGINE
    • Indexed Chunks:        95 Authoritative NIDDK Clinical Document Chunks

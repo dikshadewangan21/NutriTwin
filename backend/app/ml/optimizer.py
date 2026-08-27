@@ -114,13 +114,15 @@ class MultiConstraintDietOptimizer:
         pro_dev = pulp.LpVariable("pro_dev", lowBound=0)
         carb_dev = pulp.LpVariable("carb_dev", lowBound=0)
         fat_dev = pulp.LpVariable("fat_dev", lowBound=0)
+        budget_dev = pulp.LpVariable("budget_dev", lowBound=0)
 
-        # Objective Function: minimize weighted macro deviation + food cost
+        # Objective Function: minimize weighted macro deviation + soft budget penalty + food cost
         prob += (
             1.0 * cal_dev +
             4.0 * pro_dev +
             1.2 * carb_dev +
             1.5 * fat_dev +
+            25.0 * budget_dev +
             0.5 * pulp.lpSum([f.approx_cost_inr * food_vars[f.id] for f in filtered_candidates])
         )
 
@@ -129,7 +131,7 @@ class MultiConstraintDietOptimizer:
         prob += t_cal - pulp.lpSum([f.calories * food_vars[f.id] for f in filtered_candidates]) <= cal_dev
 
         prob += t_pro - pulp.lpSum([f.protein_g * food_vars[f.id] for f in filtered_candidates]) <= pro_dev
-        prob += pulp.lpSum([f.protein_g * food_vars[f.id] for f in filtered_candidates]) >= 0.70 * t_pro
+        prob += pulp.lpSum([f.protein_g * food_vars[f.id] for f in filtered_candidates]) - t_pro <= pro_dev
 
         prob += pulp.lpSum([f.carbs_g * food_vars[f.id] for f in filtered_candidates]) - t_carb <= carb_dev
         prob += t_carb - pulp.lpSum([f.carbs_g * food_vars[f.id] for f in filtered_candidates]) <= carb_dev
@@ -137,8 +139,8 @@ class MultiConstraintDietOptimizer:
         prob += pulp.lpSum([f.fat_g * food_vars[f.id] for f in filtered_candidates]) - t_fat <= fat_dev
         prob += t_fat - pulp.lpSum([f.fat_g * food_vars[f.id] for f in filtered_candidates]) <= fat_dev
 
-        # HARD BUDGET CONSTRAINT: Total Daily Cost <= Max Budget
-        prob += pulp.lpSum([f.approx_cost_inr * food_vars[f.id] for f in filtered_candidates]) <= max_budget
+        # SOFT BUDGET CONSTRAINT: Total Daily Cost <= Max Budget + budget_dev
+        prob += pulp.lpSum([f.approx_cost_inr * food_vars[f.id] for f in filtered_candidates]) - max_budget <= budget_dev
 
         # Meal Category Structure Constraints
         bf_foods = [f for f in filtered_candidates if getattr(f, "category", "") == "breakfast"]
@@ -161,8 +163,8 @@ class MultiConstraintDietOptimizer:
             if lid in food_vars:
                 prob += food_vars[lid] == 1
 
-        # Execute PuLP Solver with a strict 3-second timeout
-        solver = pulp.PULP_CBC_CMD(msg=0, timeLimit=3)
+        # Execute PuLP Solver with a strict 2-second timeout
+        solver = pulp.PULP_CBC_CMD(msg=0, timeLimit=2)
         status = prob.solve(solver)
         solve_duration = round(time.time() - start_time, 4)
 

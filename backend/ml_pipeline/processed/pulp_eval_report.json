@@ -1,18 +1,18 @@
 {
-  "evaluation_timestamp": "2026-08-27 02:40:06",
+  "evaluation_timestamp": "2026-08-28 03:39:12",
   "database_records_evaluated": 317,
   "total_scenarios_tested": 109,
-  "optimal_feasible_scenarios": 76,
-  "infeasible_fallback_scenarios": 33,
-  "feasibility_rate_pct": 69.72,
+  "optimal_feasible_scenarios": 109,
+  "infeasible_fallback_scenarios": 0,
+  "feasibility_rate_pct": 100.0,
   "solve_time_ms": {
-    "mean": 273.47,
-    "max": 958.05
+    "mean": 199.77,
+    "max": 775.55
   },
-  "budget_compliance_rate_pct": 71.56,
-  "macro_satisfaction_rate_pct": 46.79,
+  "budget_compliance_rate_pct": 76.15,
+  "macro_satisfaction_rate_pct": 47.71,
   "average_deviations": {
-    "calorie_diff_kcal": 275.6,
-    "protein_diff_g": 30.7
+    "calorie_diff_kcal": 227.1,
+    "protein_diff_g": 38.3
   }
 }

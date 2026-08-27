@@ -1,20 +1,20 @@
 {
   "summary": {
-    "evaluation_timestamp": "2026-08-27 02:40:06",
+    "evaluation_timestamp": "2026-08-28 03:39:12",
     "database_records_evaluated": 317,
     "total_scenarios_tested": 109,
-    "optimal_feasible_scenarios": 76,
-    "infeasible_fallback_scenarios": 33,
-    "feasibility_rate_pct": 69.72,
+    "optimal_feasible_scenarios": 109,
+    "infeasible_fallback_scenarios": 0,
+    "feasibility_rate_pct": 100.0,
     "solve_time_ms": {
-      "mean": 273.47,
-      "max": 958.05
+      "mean": 199.77,
+      "max": 775.55
     },
-    "budget_compliance_rate_pct": 71.56,
-    "macro_satisfaction_rate_pct": 46.79,
+    "budget_compliance_rate_pct": 76.15,
+    "macro_satisfaction_rate_pct": 47.71,
     "average_deviations": {
-      "calorie_diff_kcal": 275.6,
-      "protein_diff_g": 30.7
+      "calorie_diff_kcal": 227.1,
+      "protein_diff_g": 38.3
     }
   },
   "scenarios": [
@@ -25,19 +25,19 @@
       "dietary_preference": "vegetarian",
       "target_calories": 2000.0,
       "target_protein_g": 80.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 131.81,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 124.66,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1982.5,
+        "protein_g": 23.3,
+        "carbs_g": 115.3,
+        "fat_g": 159.1,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 385.0,
-      "protein_deviation": 17.8,
+      "calorie_deviation": 17.5,
+      "protein_deviation": 56.7,
       "macro_satisfied": false
     },
     {
@@ -47,19 +47,19 @@
       "dietary_preference": "vegetarian",
       "target_calories": 2400.0,
       "target_protein_g": 140.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 181.31,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 117.25,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1982.5,
+        "protein_g": 23.3,
+        "carbs_g": 115.3,
+        "fat_g": 159.1,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 785.0,
-      "protein_deviation": 77.8,
+      "calorie_deviation": 417.5,
+      "protein_deviation": 116.7,
       "macro_satisfied": false
     },
     {
@@ -69,20 +69,20 @@
       "dietary_preference": "vegetarian",
       "target_calories": 1400.0,
       "target_protein_g": 90.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 148.92,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 133.55,
       "achieved_totals": {
-        "calories": 1406.0,
-        "protein_g": 86.7,
-        "carbs_g": 168.0,
-        "fat_g": 38.5,
-        "cost_inr": 165.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 6.0,
-      "protein_deviation": 3.3,
-      "macro_satisfied": true
+      "calorie_deviation": 530.0,
+      "protein_deviation": 56.7,
+      "macro_satisfied": false
     },
     {
       "scenario_id": 4,
@@ -91,19 +91,19 @@
       "dietary_preference": "vegetarian",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 160.09,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 128.76,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1982.5,
+        "protein_g": 23.3,
+        "carbs_g": 115.3,
+        "fat_g": 159.1,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 985.0,
-      "protein_deviation": 107.8,
+      "calorie_deviation": 617.5,
+      "protein_deviation": 146.7,
       "macro_satisfied": false
     },
     {
@@ -113,19 +113,19 @@
       "dietary_preference": "vegetarian",
       "target_calories": 1800.0,
       "target_protein_g": 110.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 162.36,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 129.99,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1962.5,
+        "protein_g": 30.8,
+        "carbs_g": 103.3,
+        "fat_g": 159.6,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 185.0,
-      "protein_deviation": 47.8,
+      "calorie_deviation": 162.5,
+      "protein_deviation": 79.2,
       "macro_satisfied": false
     },
     {
@@ -135,20 +135,20 @@
       "dietary_preference": "vegetarian",
       "target_calories": 1600.0,
       "target_protein_g": 70.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 146.42,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 107.9,
       "achieved_totals": {
-        "calories": 1535.0,
-        "protein_g": 81.5,
-        "carbs_g": 165.9,
-        "fat_g": 61.9,
-        "cost_inr": 170.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 65.0,
-      "protein_deviation": 11.5,
-      "macro_satisfied": true
+      "calorie_deviation": 730.0,
+      "protein_deviation": 36.7,
+      "macro_satisfied": false
     },
     {
       "scenario_id": 7,
@@ -157,19 +157,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2000.0,
       "target_protein_g": 80.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 134.35,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 99.53,
       "achieved_totals": {
-        "calories": 1505.0,
-        "protein_g": 59.2,
-        "carbs_g": 206.7,
-        "fat_g": 47.2,
-        "cost_inr": 165.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 495.0,
-      "protein_deviation": 20.8,
+      "calorie_deviation": 1130.0,
+      "protein_deviation": 46.7,
       "macro_satisfied": false
     },
     {
@@ -179,19 +179,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2400.0,
       "target_protein_g": 140.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 172.11,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 100.43,
       "achieved_totals": {
-        "calories": 1505.0,
-        "protein_g": 59.2,
-        "carbs_g": 206.7,
-        "fat_g": 47.2,
-        "cost_inr": 165.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 895.0,
-      "protein_deviation": 80.8,
+      "calorie_deviation": 1530.0,
+      "protein_deviation": 106.7,
       "macro_satisfied": false
     },
     {
@@ -201,19 +201,19 @@
       "dietary_preference": "vegan",
       "target_calories": 1400.0,
       "target_protein_g": 90.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 131.15,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 116.53,
       "achieved_totals": {
-        "calories": 1389.0,
-        "protein_g": 57.6,
-        "carbs_g": 210.9,
-        "fat_g": 33.1,
-        "cost_inr": 160.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 11.0,
-      "protein_deviation": 32.4,
+      "calorie_deviation": 530.0,
+      "protein_deviation": 56.7,
       "macro_satisfied": false
     },
     {
@@ -223,19 +223,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 114.01,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 100.53,
       "achieved_totals": {
-        "calories": 1505.0,
-        "protein_g": 59.2,
-        "carbs_g": 206.7,
-        "fat_g": 47.2,
-        "cost_inr": 165.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 1095.0,
-      "protein_deviation": 110.8,
+      "calorie_deviation": 1730.0,
+      "protein_deviation": 136.7,
       "macro_satisfied": false
     },
     {
@@ -245,19 +245,19 @@
       "dietary_preference": "vegan",
       "target_calories": 1800.0,
       "target_protein_g": 110.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 91.37,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 95.17,
       "achieved_totals": {
-        "calories": 1505.0,
-        "protein_g": 59.2,
-        "carbs_g": 206.7,
-        "fat_g": 47.2,
-        "cost_inr": 165.0
+        "calories": 850.0,
+        "protein_g": 40.8,
+        "carbs_g": 120.0,
+        "fat_g": 25.0,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 295.0,
-      "protein_deviation": 50.8,
+      "calorie_deviation": 950.0,
+      "protein_deviation": 69.2,
       "macro_satisfied": false
     },
     {
@@ -267,20 +267,20 @@
       "dietary_preference": "vegan",
       "target_calories": 1600.0,
       "target_protein_g": 70.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 123.91,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 118.82,
       "achieved_totals": {
-        "calories": 1425.0,
-        "protein_g": 78.5,
-        "carbs_g": 158.9,
-        "fat_g": 54.4,
-        "cost_inr": 165.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 175.0,
-      "protein_deviation": 8.5,
-      "macro_satisfied": true
+      "calorie_deviation": 730.0,
+      "protein_deviation": 36.7,
+      "macro_satisfied": false
     },
     {
       "scenario_id": 13,
@@ -289,19 +289,19 @@
       "dietary_preference": "eggetarian",
       "target_calories": 2000.0,
       "target_protein_g": 80.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 168.94,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 88.72,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1982.5,
+        "protein_g": 23.3,
+        "carbs_g": 115.3,
+        "fat_g": 159.1,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 385.0,
-      "protein_deviation": 17.8,
+      "calorie_deviation": 17.5,
+      "protein_deviation": 56.7,
       "macro_satisfied": false
     },
     {
@@ -311,19 +311,19 @@
       "dietary_preference": "eggetarian",
       "target_calories": 2400.0,
       "target_protein_g": 140.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 172.33,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 108.09,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1982.5,
+        "protein_g": 23.3,
+        "carbs_g": 115.3,
+        "fat_g": 159.1,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 785.0,
-      "protein_deviation": 77.8,
+      "calorie_deviation": 417.5,
+      "protein_deviation": 116.7,
       "macro_satisfied": false
     },
     {
@@ -333,20 +333,20 @@
       "dietary_preference": "eggetarian",
       "target_calories": 1400.0,
       "target_protein_g": 90.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 178.24,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 113.12,
       "achieved_totals": {
-        "calories": 1366.0,
-        "protein_g": 96.7,
-        "carbs_g": 142.0,
-        "fat_g": 40.5,
-        "cost_inr": 175.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 34.0,
-      "protein_deviation": 6.7,
-      "macro_satisfied": true
+      "calorie_deviation": 530.0,
+      "protein_deviation": 56.7,
+      "macro_satisfied": false
     },
     {
       "scenario_id": 16,
@@ -355,19 +355,19 @@
       "dietary_preference": "eggetarian",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 134.51,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 112.23,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1982.5,
+        "protein_g": 23.3,
+        "carbs_g": 115.3,
+        "fat_g": 159.1,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 985.0,
-      "protein_deviation": 107.8,
+      "calorie_deviation": 617.5,
+      "protein_deviation": 146.7,
       "macro_satisfied": false
     },
     {
@@ -377,19 +377,19 @@
       "dietary_preference": "eggetarian",
       "target_calories": 1800.0,
       "target_protein_g": 110.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 205.9,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 165.26,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1962.5,
+        "protein_g": 30.8,
+        "carbs_g": 103.3,
+        "fat_g": 159.6,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 185.0,
-      "protein_deviation": 47.8,
+      "calorie_deviation": 162.5,
+      "protein_deviation": 79.2,
       "macro_satisfied": false
     },
     {
@@ -399,20 +399,20 @@
       "dietary_preference": "eggetarian",
       "target_calories": 1600.0,
       "target_protein_g": 70.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 169.4,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 116.88,
       "achieved_totals": {
-        "calories": 1535.0,
-        "protein_g": 81.5,
-        "carbs_g": 165.9,
-        "fat_g": 61.9,
-        "cost_inr": 170.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 65.0,
-      "protein_deviation": 11.5,
-      "macro_satisfied": true
+      "calorie_deviation": 730.0,
+      "protein_deviation": 36.7,
+      "macro_satisfied": false
     },
     {
       "scenario_id": 19,
@@ -421,19 +421,19 @@
       "dietary_preference": "non_vegetarian",
       "target_calories": 2000.0,
       "target_protein_g": 80.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 111.72,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 120.67,
       "achieved_totals": {
-        "calories": 1615.0,
-        "protein_g": 62.2,
-        "carbs_g": 213.7,
-        "fat_g": 54.7,
-        "cost_inr": 170.0
+        "calories": 1982.5,
+        "protein_g": 23.3,
+        "carbs_g": 115.3,
+        "fat_g": 159.1,
+        "cost_inr": 130.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 385.0,
-      "protein_deviation": 17.8,
+      "calorie_deviation": 17.5,
+      "protein_deviation": 56.7,
       "macro_satisfied": false
     },
     {
@@ -443,19 +443,19 @@
       "dietary_preference": "non_vegetarian",
       "target_calories": 2400.0,
       "target_protein_g": 140.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 145.54,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 108.61,
       "achieved_totals": {
-        "calories": 1820.0,
-        "protein_g": 83.0,
-        "carbs_g": 176.2,
-        "fat_g": 85.1,
-        "cost_inr": 170.0
+        "calories": 2357.5,
+        "protein_g": 67.3,
+        "carbs_g": 89.8,
+        "fat_g": 192.0,
+        "cost_inr": 145.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 580.0,
-      "protein_deviation": 57.0,
+      "calorie_deviation": 42.5,
+      "protein_deviation": 72.7,
       "macro_satisfied": false
     },
     {
@@ -465,19 +465,19 @@
       "dietary_preference": "non_vegetarian",
       "target_calories": 1400.0,
       "target_protein_g": 90.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 139.28,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 104.44,
       "achieved_totals": {
-        "calories": 1366.0,
-        "protein_g": 96.7,
-        "carbs_g": 142.0,
-        "fat_g": 40.5,
-        "cost_inr": 175.0
+        "calories": 1245.0,
+        "protein_g": 77.3,
+        "carbs_g": 106.5,
+        "fat_g": 57.4,
+        "cost_inr": 120.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 34.0,
-      "protein_deviation": 6.7,
+      "calorie_deviation": 155.0,
+      "protein_deviation": 12.7,
       "macro_satisfied": true
     },
     {
@@ -487,19 +487,19 @@
       "dietary_preference": "non_vegetarian",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 129.73,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 98.4,
       "achieved_totals": {
-        "calories": 1886.0,
-        "protein_g": 63.7,
-        "carbs_g": 159.7,
-        "fat_g": 107.7,
-        "cost_inr": 170.0
+        "calories": 2357.5,
+        "protein_g": 67.3,
+        "carbs_g": 89.8,
+        "fat_g": 192.0,
+        "cost_inr": 145.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 714.0,
-      "protein_deviation": 106.3,
+      "calorie_deviation": 242.5,
+      "protein_deviation": 102.7,
       "macro_satisfied": false
     },
     {
@@ -509,19 +509,19 @@
       "dietary_preference": "non_vegetarian",
       "target_calories": 1800.0,
       "target_protein_g": 110.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 214.8,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 117.12,
       "achieved_totals": {
-        "calories": 1545.0,
-        "protein_g": 63.7,
-        "carbs_g": 209.7,
-        "fat_g": 47.7,
-        "cost_inr": 175.0
+        "calories": 1291.0,
+        "protein_g": 65.5,
+        "carbs_g": 78.0,
+        "fat_g": 80.5,
+        "cost_inr": 120.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 255.0,
-      "protein_deviation": 46.3,
+      "calorie_deviation": 509.0,
+      "protein_deviation": 44.5,
       "macro_satisfied": false
     },
     {
@@ -531,20 +531,20 @@
       "dietary_preference": "non_vegetarian",
       "target_calories": 1600.0,
       "target_protein_g": 70.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 135.69,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 129.08,
       "achieved_totals": {
-        "calories": 1535.0,
-        "protein_g": 81.5,
-        "carbs_g": 165.9,
-        "fat_g": 61.9,
-        "cost_inr": 170.0
+        "calories": 1245.0,
+        "protein_g": 77.3,
+        "carbs_g": 106.5,
+        "fat_g": 57.4,
+        "cost_inr": 120.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 65.0,
-      "protein_deviation": 11.5,
-      "macro_satisfied": true
+      "calorie_deviation": 355.0,
+      "protein_deviation": 7.3,
+      "macro_satisfied": false
     },
     {
       "scenario_id": 25,
@@ -555,17 +555,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 277.69,
+      "solve_time_ms": 118.42,
       "achieved_totals": {
-        "calories": 1967.0,
-        "protein_g": 58.0,
-        "carbs_g": 64.0,
-        "fat_g": 165.4,
+        "calories": 1987.0,
+        "protein_g": 50.5,
+        "carbs_g": 76.0,
+        "fat_g": 164.9,
         "cost_inr": 145.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 33.0,
-      "protein_deviation": 22.0,
+      "calorie_deviation": 13.0,
+      "protein_deviation": 29.5,
       "macro_satisfied": false
     },
     {
@@ -577,17 +577,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 193.58,
+      "solve_time_ms": 126.39,
       "achieved_totals": {
-        "calories": 1152.0,
-        "protein_g": 101.1,
-        "carbs_g": 79.0,
-        "fat_g": 48.3,
+        "calories": 2242.5,
+        "protein_g": 44.5,
+        "carbs_g": 145.3,
+        "fat_g": 161.1,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 1248.0,
-      "protein_deviation": 38.9,
+      "calorie_deviation": 157.5,
+      "protein_deviation": 95.5,
       "macro_satisfied": false
     },
     {
@@ -599,7 +599,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 205.42,
+      "solve_time_ms": 124.7,
       "achieved_totals": {
         "calories": 1356.0,
         "protein_g": 81.4,
@@ -619,19 +619,19 @@
       "dietary_preference": "vegetarian",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 152.95,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 110.45,
       "achieved_totals": {
-        "calories": 1885.0,
-        "protein_g": 51.2,
-        "carbs_g": 247.7,
-        "fat_g": 74.7,
-        "cost_inr": 215.0
+        "calories": 2242.5,
+        "protein_g": 44.5,
+        "carbs_g": 145.3,
+        "fat_g": 161.1,
+        "cost_inr": 150.0
       },
-      "budget_satisfaction": false,
-      "calorie_deviation": 715.0,
-      "protein_deviation": 118.8,
+      "budget_satisfaction": true,
+      "calorie_deviation": 357.5,
+      "protein_deviation": 125.5,
       "macro_satisfied": false
     },
     {
@@ -643,17 +643,17 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 224.62,
+      "solve_time_ms": 139.73,
       "achieved_totals": {
-        "calories": 1356.0,
-        "protein_g": 81.4,
-        "carbs_g": 142.0,
-        "fat_g": 53.3,
+        "calories": 1802.5,
+        "protein_g": 28.0,
+        "carbs_g": 65.3,
+        "fat_g": 159.6,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 444.0,
-      "protein_deviation": 28.6,
+      "calorie_deviation": 2.5,
+      "protein_deviation": 82.0,
       "macro_satisfied": false
     },
     {
@@ -665,7 +665,7 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 173.18,
+      "solve_time_ms": 116.66,
       "achieved_totals": {
         "calories": 1370.0,
         "protein_g": 73.5,
@@ -687,7 +687,7 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 161.53,
+      "solve_time_ms": 97.3,
       "achieved_totals": {
         "calories": 1355.0,
         "protein_g": 73.0,
@@ -707,19 +707,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2400.0,
       "target_protein_g": 140.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 129.48,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 115.29,
       "achieved_totals": {
-        "calories": 1555.0,
-        "protein_g": 46.7,
-        "carbs_g": 228.7,
-        "fat_g": 48.2,
-        "cost_inr": 190.0
+        "calories": 1355.0,
+        "protein_g": 73.0,
+        "carbs_g": 186.0,
+        "fat_g": 34.0,
+        "cost_inr": 150.0
       },
-      "budget_satisfaction": false,
-      "calorie_deviation": 845.0,
-      "protein_deviation": 93.3,
+      "budget_satisfaction": true,
+      "calorie_deviation": 1045.0,
+      "protein_deviation": 67.0,
       "macro_satisfied": false
     },
     {
@@ -731,7 +731,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 124.02,
+      "solve_time_ms": 109.82,
       "achieved_totals": {
         "calories": 1341.0,
         "protein_g": 80.9,
@@ -751,19 +751,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 122.12,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 128.39,
       "achieved_totals": {
-        "calories": 1555.0,
-        "protein_g": 46.7,
-        "carbs_g": 228.7,
-        "fat_g": 48.2,
-        "cost_inr": 190.0
+        "calories": 1355.0,
+        "protein_g": 73.0,
+        "carbs_g": 186.0,
+        "fat_g": 34.0,
+        "cost_inr": 150.0
       },
-      "budget_satisfaction": false,
-      "calorie_deviation": 1045.0,
-      "protein_deviation": 123.3,
+      "budget_satisfaction": true,
+      "calorie_deviation": 1245.0,
+      "protein_deviation": 97.0,
       "macro_satisfied": false
     },
     {
@@ -775,7 +775,7 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 159.36,
+      "solve_time_ms": 116.07,
       "achieved_totals": {
         "calories": 1341.0,
         "protein_g": 80.9,
@@ -797,18 +797,18 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 179.15,
+      "solve_time_ms": 128.39,
       "achieved_totals": {
-        "calories": 1355.0,
-        "protein_g": 73.0,
-        "carbs_g": 186.0,
-        "fat_g": 34.0,
+        "calories": 1360.0,
+        "protein_g": 65.0,
+        "carbs_g": 192.0,
+        "fat_g": 33.5,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 245.0,
-      "protein_deviation": 3.0,
-      "macro_satisfied": false
+      "calorie_deviation": 240.0,
+      "protein_deviation": 5.0,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 37,
@@ -819,17 +819,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 165.65,
+      "solve_time_ms": 150.37,
       "achieved_totals": {
-        "calories": 1967.0,
-        "protein_g": 58.0,
-        "carbs_g": 64.0,
-        "fat_g": 165.4,
+        "calories": 1987.0,
+        "protein_g": 50.5,
+        "carbs_g": 76.0,
+        "fat_g": 164.9,
         "cost_inr": 145.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 33.0,
-      "protein_deviation": 22.0,
+      "calorie_deviation": 13.0,
+      "protein_deviation": 29.5,
       "macro_satisfied": false
     },
     {
@@ -841,17 +841,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 177.27,
+      "solve_time_ms": 104.46,
       "achieved_totals": {
-        "calories": 1142.0,
-        "protein_g": 102.1,
-        "carbs_g": 82.0,
-        "fat_g": 45.3,
+        "calories": 2242.5,
+        "protein_g": 44.5,
+        "carbs_g": 145.3,
+        "fat_g": 161.1,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 1258.0,
-      "protein_deviation": 37.9,
+      "calorie_deviation": 157.5,
+      "protein_deviation": 95.5,
       "macro_satisfied": false
     },
     {
@@ -863,7 +863,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 205.03,
+      "solve_time_ms": 118.94,
       "achieved_totals": {
         "calories": 1356.0,
         "protein_g": 81.4,
@@ -883,19 +883,19 @@
       "dietary_preference": "eggetarian",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 142.29,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 113.58,
       "achieved_totals": {
-        "calories": 1885.0,
-        "protein_g": 51.2,
-        "carbs_g": 247.7,
-        "fat_g": 74.7,
-        "cost_inr": 215.0
+        "calories": 2242.5,
+        "protein_g": 44.5,
+        "carbs_g": 145.3,
+        "fat_g": 161.1,
+        "cost_inr": 150.0
       },
-      "budget_satisfaction": false,
-      "calorie_deviation": 715.0,
-      "protein_deviation": 118.8,
+      "budget_satisfaction": true,
+      "calorie_deviation": 357.5,
+      "protein_deviation": 125.5,
       "macro_satisfied": false
     },
     {
@@ -907,17 +907,17 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 168.75,
+      "solve_time_ms": 126.26,
       "achieved_totals": {
-        "calories": 1356.0,
-        "protein_g": 81.4,
-        "carbs_g": 142.0,
-        "fat_g": 53.3,
+        "calories": 1802.5,
+        "protein_g": 27.0,
+        "carbs_g": 69.3,
+        "fat_g": 158.6,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 444.0,
-      "protein_deviation": 28.6,
+      "calorie_deviation": 2.5,
+      "protein_deviation": 83.0,
       "macro_satisfied": false
     },
     {
@@ -929,17 +929,17 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 155.2,
+      "solve_time_ms": 126.77,
       "achieved_totals": {
-        "calories": 1370.0,
-        "protein_g": 73.5,
-        "carbs_g": 190.0,
-        "fat_g": 34.5,
+        "calories": 1380.0,
+        "protein_g": 65.0,
+        "carbs_g": 194.0,
+        "fat_g": 35.5,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 230.0,
-      "protein_deviation": 3.5,
+      "calorie_deviation": 220.0,
+      "protein_deviation": 5.0,
       "macro_satisfied": true
     },
     {
@@ -951,17 +951,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 195.43,
+      "solve_time_ms": 133.17,
       "achieved_totals": {
-        "calories": 1967.0,
-        "protein_g": 58.0,
-        "carbs_g": 64.0,
-        "fat_g": 165.4,
+        "calories": 1987.0,
+        "protein_g": 50.5,
+        "carbs_g": 76.0,
+        "fat_g": 164.9,
         "cost_inr": 145.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 33.0,
-      "protein_deviation": 22.0,
+      "calorie_deviation": 13.0,
+      "protein_deviation": 29.5,
       "macro_satisfied": false
     },
     {
@@ -973,17 +973,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 195.97,
+      "solve_time_ms": 123.08,
       "achieved_totals": {
-        "calories": 1371.0,
-        "protein_g": 114.0,
-        "carbs_g": 89.5,
-        "fat_g": 59.9,
+        "calories": 2397.5,
+        "protein_g": 69.8,
+        "carbs_g": 93.8,
+        "fat_g": 193.0,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 1029.0,
-      "protein_deviation": 26.0,
+      "calorie_deviation": 2.5,
+      "protein_deviation": 70.2,
       "macro_satisfied": false
     },
     {
@@ -995,7 +995,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 186.95,
+      "solve_time_ms": 124.19,
       "achieved_totals": {
         "calories": 1400.0,
         "protein_g": 89.3,
@@ -1017,17 +1017,17 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 200.22,
+      "solve_time_ms": 104.99,
       "achieved_totals": {
-        "calories": 1301.0,
-        "protein_g": 120.0,
-        "carbs_g": 76.5,
-        "fat_g": 56.4,
-        "cost_inr": 145.0
+        "calories": 2497.5,
+        "protein_g": 78.3,
+        "carbs_g": 103.8,
+        "fat_g": 194.0,
+        "cost_inr": 155.0
       },
-      "budget_satisfaction": true,
-      "calorie_deviation": 1299.0,
-      "protein_deviation": 50.0,
+      "budget_satisfaction": false,
+      "calorie_deviation": 102.5,
+      "protein_deviation": 91.7,
       "macro_satisfied": false
     },
     {
@@ -1039,18 +1039,18 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 232.87,
+      "solve_time_ms": 138.08,
       "achieved_totals": {
-        "calories": 1575.0,
-        "protein_g": 94.3,
-        "carbs_g": 152.5,
-        "fat_g": 64.9,
+        "calories": 1802.5,
+        "protein_g": 28.0,
+        "carbs_g": 65.3,
+        "fat_g": 159.6,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 225.0,
-      "protein_deviation": 15.7,
-      "macro_satisfied": true
+      "calorie_deviation": 2.5,
+      "protein_deviation": 82.0,
+      "macro_satisfied": false
     },
     {
       "scenario_id": 48,
@@ -1061,18 +1061,18 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 156.4,
+      "solve_time_ms": 130.84,
       "achieved_totals": {
-        "calories": 1575.0,
-        "protein_g": 94.3,
-        "carbs_g": 152.5,
-        "fat_g": 64.9,
+        "calories": 1586.0,
+        "protein_g": 70.5,
+        "carbs_g": 146.0,
+        "fat_g": 78.5,
         "cost_inr": 150.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 25.0,
-      "protein_deviation": 24.3,
-      "macro_satisfied": false
+      "calorie_deviation": 14.0,
+      "protein_deviation": 0.5,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 49,
@@ -1083,7 +1083,7 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 227.32,
+      "solve_time_ms": 182.49,
       "achieved_totals": {
         "calories": 1895.0,
         "protein_g": 74.5,
@@ -1105,17 +1105,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 217.55,
+      "solve_time_ms": 175.49,
       "achieved_totals": {
-        "calories": 2438.5,
-        "protein_g": 99.2,
-        "carbs_g": 115.3,
-        "fat_g": 174.6,
-        "cost_inr": 190.0
+        "calories": 2398.5,
+        "protein_g": 95.4,
+        "carbs_g": 121.5,
+        "fat_g": 168.1,
+        "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 38.5,
-      "protein_deviation": 40.8,
+      "calorie_deviation": 1.5,
+      "protein_deviation": 44.6,
       "macro_satisfied": false
     },
     {
@@ -1127,17 +1127,17 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 897.1,
+      "solve_time_ms": 440.44,
       "achieved_totals": {
-        "calories": 1397.5,
-        "protein_g": 101.6,
-        "carbs_g": 147.0,
-        "fat_g": 45.0,
-        "cost_inr": 180.0
+        "calories": 1396.0,
+        "protein_g": 90.4,
+        "carbs_g": 156.2,
+        "fat_g": 43.0,
+        "cost_inr": 170.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 2.5,
-      "protein_deviation": 11.6,
+      "calorie_deviation": 4.0,
+      "protein_deviation": 0.4,
       "macro_satisfied": true
     },
     {
@@ -1149,17 +1149,17 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 221.09,
+      "solve_time_ms": 116.04,
       "achieved_totals": {
-        "calories": 1722.0,
-        "protein_g": 119.9,
-        "carbs_g": 156.0,
-        "fat_g": 69.8,
+        "calories": 2598.5,
+        "protein_g": 102.7,
+        "carbs_g": 141.3,
+        "fat_g": 176.1,
         "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 878.0,
-      "protein_deviation": 50.1,
+      "calorie_deviation": 1.5,
+      "protein_deviation": 67.3,
       "macro_satisfied": false
     },
     {
@@ -1171,7 +1171,7 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 359.84,
+      "solve_time_ms": 255.86,
       "achieved_totals": {
         "calories": 1722.0,
         "protein_g": 112.6,
@@ -1193,17 +1193,17 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 556.2,
+      "solve_time_ms": 576.77,
       "achieved_totals": {
-        "calories": 1610.0,
-        "protein_g": 75.0,
-        "carbs_g": 212.0,
-        "fat_g": 49.5,
-        "cost_inr": 170.0
+        "calories": 1600.0,
+        "protein_g": 71.7,
+        "carbs_g": 209.7,
+        "fat_g": 52.9,
+        "cost_inr": 190.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 10.0,
-      "protein_deviation": 5.0,
+      "calorie_deviation": 0.0,
+      "protein_deviation": 1.7,
       "macro_satisfied": true
     },
     {
@@ -1215,17 +1215,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 150.9,
+      "solve_time_ms": 133.04,
       "achieved_totals": {
-        "calories": 1814.0,
-        "protein_g": 84.3,
-        "carbs_g": 239.6,
-        "fat_g": 55.8,
+        "calories": 1830.0,
+        "protein_g": 70.2,
+        "carbs_g": 246.7,
+        "fat_g": 61.4,
         "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 186.0,
-      "protein_deviation": 4.3,
+      "calorie_deviation": 170.0,
+      "protein_deviation": 9.8,
       "macro_satisfied": true
     },
     {
@@ -1237,17 +1237,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 133.29,
+      "solve_time_ms": 111.09,
       "achieved_totals": {
-        "calories": 1734.0,
-        "protein_g": 103.6,
-        "carbs_g": 191.8,
-        "fat_g": 63.0,
+        "calories": 1814.0,
+        "protein_g": 84.3,
+        "carbs_g": 239.6,
+        "fat_g": 55.8,
         "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 666.0,
-      "protein_deviation": 36.4,
+      "calorie_deviation": 586.0,
+      "protein_deviation": 55.7,
       "macro_satisfied": false
     },
     {
@@ -1259,7 +1259,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 170.32,
+      "solve_time_ms": 129.22,
       "achieved_totals": {
         "calories": 1405.0,
         "protein_g": 91.5,
@@ -1279,19 +1279,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 118.83,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 90.21,
       "achieved_totals": {
-        "calories": 1555.0,
-        "protein_g": 46.7,
-        "carbs_g": 228.7,
-        "fat_g": 48.2,
-        "cost_inr": 190.0
+        "calories": 1814.0,
+        "protein_g": 84.3,
+        "carbs_g": 239.6,
+        "fat_g": 55.8,
+        "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 1045.0,
-      "protein_deviation": 123.3,
+      "calorie_deviation": 786.0,
+      "protein_deviation": 85.7,
       "macro_satisfied": false
     },
     {
@@ -1303,7 +1303,7 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 121.17,
+      "solve_time_ms": 175.24,
       "achieved_totals": {
         "calories": 1800.0,
         "protein_g": 92.2,
@@ -1325,7 +1325,7 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 579.46,
+      "solve_time_ms": 272.3,
       "achieved_totals": {
         "calories": 1600.0,
         "protein_g": 71.7,
@@ -1347,7 +1347,7 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 417.49,
+      "solve_time_ms": 244.24,
       "achieved_totals": {
         "calories": 1895.0,
         "protein_g": 74.5,
@@ -1369,17 +1369,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 211.2,
+      "solve_time_ms": 139.99,
       "achieved_totals": {
-        "calories": 2438.5,
-        "protein_g": 99.2,
-        "carbs_g": 115.3,
-        "fat_g": 174.6,
-        "cost_inr": 190.0
+        "calories": 2398.5,
+        "protein_g": 95.4,
+        "carbs_g": 121.5,
+        "fat_g": 168.1,
+        "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 38.5,
-      "protein_deviation": 40.8,
+      "calorie_deviation": 1.5,
+      "protein_deviation": 44.6,
       "macro_satisfied": false
     },
     {
@@ -1391,17 +1391,17 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 418.53,
+      "solve_time_ms": 340.56,
       "achieved_totals": {
         "calories": 1396.0,
-        "protein_g": 91.5,
-        "carbs_g": 154.0,
-        "fat_g": 43.5,
-        "cost_inr": 175.0
+        "protein_g": 90.2,
+        "carbs_g": 152.0,
+        "fat_g": 46.5,
+        "cost_inr": 190.0
       },
       "budget_satisfaction": true,
       "calorie_deviation": 4.0,
-      "protein_deviation": 1.5,
+      "protein_deviation": 0.2,
       "macro_satisfied": true
     },
     {
@@ -1413,17 +1413,17 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 198.8,
+      "solve_time_ms": 137.14,
       "achieved_totals": {
-        "calories": 1722.0,
-        "protein_g": 119.9,
-        "carbs_g": 156.0,
-        "fat_g": 69.8,
+        "calories": 2598.5,
+        "protein_g": 102.7,
+        "carbs_g": 141.3,
+        "fat_g": 176.1,
         "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 878.0,
-      "protein_deviation": 50.1,
+      "calorie_deviation": 1.5,
+      "protein_deviation": 67.3,
       "macro_satisfied": false
     },
     {
@@ -1435,7 +1435,7 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 327.83,
+      "solve_time_ms": 239.24,
       "achieved_totals": {
         "calories": 1707.0,
         "protein_g": 118.3,
@@ -1457,17 +1457,17 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 636.73,
+      "solve_time_ms": 651.82,
       "achieved_totals": {
-        "calories": 1610.0,
-        "protein_g": 75.0,
+        "calories": 1600.0,
+        "protein_g": 71.5,
         "carbs_g": 212.0,
-        "fat_g": 49.5,
-        "cost_inr": 170.0
+        "fat_g": 48.0,
+        "cost_inr": 190.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 10.0,
-      "protein_deviation": 5.0,
+      "calorie_deviation": 0.0,
+      "protein_deviation": 1.5,
       "macro_satisfied": true
     },
     {
@@ -1479,17 +1479,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 227.12,
+      "solve_time_ms": 183.49,
       "achieved_totals": {
-        "calories": 1990.0,
-        "protein_g": 93.3,
-        "carbs_g": 236.5,
-        "fat_g": 74.6,
+        "calories": 2005.0,
+        "protein_g": 81.5,
+        "carbs_g": 220.2,
+        "fat_g": 89.8,
         "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 10.0,
-      "protein_deviation": 13.3,
+      "calorie_deviation": 5.0,
+      "protein_deviation": 1.5,
       "macro_satisfied": true
     },
     {
@@ -1501,17 +1501,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 209.9,
+      "solve_time_ms": 125.92,
       "achieved_totals": {
-        "calories": 2438.5,
-        "protein_g": 99.2,
-        "carbs_g": 115.3,
-        "fat_g": 174.6,
-        "cost_inr": 190.0
+        "calories": 2398.5,
+        "protein_g": 95.4,
+        "carbs_g": 121.5,
+        "fat_g": 168.1,
+        "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 38.5,
-      "protein_deviation": 40.8,
+      "calorie_deviation": 1.5,
+      "protein_deviation": 44.6,
       "macro_satisfied": false
     },
     {
@@ -1523,7 +1523,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 611.45,
+      "solve_time_ms": 373.7,
       "achieved_totals": {
         "calories": 1400.0,
         "protein_g": 89.6,
@@ -1545,17 +1545,17 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 183.98,
+      "solve_time_ms": 123.79,
       "achieved_totals": {
-        "calories": 2643.5,
-        "protein_g": 120.0,
-        "carbs_g": 77.8,
-        "fat_g": 205.0,
-        "cost_inr": 190.0
+        "calories": 2598.5,
+        "protein_g": 102.7,
+        "carbs_g": 141.3,
+        "fat_g": 176.1,
+        "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 43.5,
-      "protein_deviation": 50.0,
+      "calorie_deviation": 1.5,
+      "protein_deviation": 67.3,
       "macro_satisfied": false
     },
     {
@@ -1567,17 +1567,17 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 246.89,
+      "solve_time_ms": 316.63,
       "achieved_totals": {
-        "calories": 1787.0,
-        "protein_g": 117.2,
-        "carbs_g": 80.0,
-        "fat_g": 107.0,
-        "cost_inr": 195.0
+        "calories": 1777.0,
+        "protein_g": 110.2,
+        "carbs_g": 88.0,
+        "fat_g": 108.0,
+        "cost_inr": 190.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 13.0,
-      "protein_deviation": 7.2,
+      "calorie_deviation": 23.0,
+      "protein_deviation": 0.2,
       "macro_satisfied": true
     },
     {
@@ -1589,17 +1589,17 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 658.77,
+      "solve_time_ms": 775.55,
       "achieved_totals": {
-        "calories": 1599.0,
-        "protein_g": 79.6,
-        "carbs_g": 209.9,
-        "fat_g": 50.6,
-        "cost_inr": 185.0
+        "calories": 1600.0,
+        "protein_g": 71.5,
+        "carbs_g": 212.0,
+        "fat_g": 48.0,
+        "cost_inr": 190.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 1.0,
-      "protein_deviation": 9.6,
+      "calorie_deviation": 0.0,
+      "protein_deviation": 1.5,
       "macro_satisfied": true
     },
     {
@@ -1611,18 +1611,18 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 669.87,
+      "solve_time_ms": 450.46,
       "achieved_totals": {
-        "calories": 1995.0,
-        "protein_g": 111.8,
-        "carbs_g": 249.9,
-        "fat_g": 58.6,
-        "cost_inr": 230.0
+        "calories": 1996.0,
+        "protein_g": 79.4,
+        "carbs_g": 249.7,
+        "fat_g": 76.2,
+        "cost_inr": 235.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 5.0,
-      "protein_deviation": 31.8,
-      "macro_satisfied": false
+      "calorie_deviation": 4.0,
+      "protein_deviation": 0.6,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 74,
@@ -1633,7 +1633,7 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 235.6,
+      "solve_time_ms": 144.79,
       "achieved_totals": {
         "calories": 2186.0,
         "protein_g": 125.7,
@@ -1655,17 +1655,17 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 637.69,
+      "solve_time_ms": 455.57,
       "achieved_totals": {
-        "calories": 1397.5,
-        "protein_g": 101.6,
-        "carbs_g": 147.0,
-        "fat_g": 45.0,
-        "cost_inr": 180.0
+        "calories": 1396.0,
+        "protein_g": 90.4,
+        "carbs_g": 156.2,
+        "fat_g": 43.0,
+        "cost_inr": 170.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 2.5,
-      "protein_deviation": 11.6,
+      "calorie_deviation": 4.0,
+      "protein_deviation": 0.4,
       "macro_satisfied": true
     },
     {
@@ -1677,17 +1677,17 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 233.28,
+      "solve_time_ms": 149.87,
       "achieved_totals": {
-        "calories": 2186.0,
-        "protein_g": 125.7,
-        "carbs_g": 266.0,
-        "fat_g": 66.5,
-        "cost_inr": 250.0
+        "calories": 2600.5,
+        "protein_g": 98.8,
+        "carbs_g": 163.3,
+        "fat_g": 168.3,
+        "cost_inr": 215.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 414.0,
-      "protein_deviation": 44.3,
+      "calorie_deviation": 0.5,
+      "protein_deviation": 71.2,
       "macro_satisfied": false
     },
     {
@@ -1699,18 +1699,18 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 474.4,
+      "solve_time_ms": 341.91,
       "achieved_totals": {
-        "calories": 1802.0,
-        "protein_g": 134.6,
-        "carbs_g": 128.0,
-        "fat_g": 84.8,
+        "calories": 1797.0,
+        "protein_g": 115.5,
+        "carbs_g": 136.9,
+        "fat_g": 87.5,
         "cost_inr": 250.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 2.0,
-      "protein_deviation": 24.6,
-      "macro_satisfied": false
+      "calorie_deviation": 3.0,
+      "protein_deviation": 5.5,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 78,
@@ -1721,7 +1721,7 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 669.29,
+      "solve_time_ms": 291.78,
       "achieved_totals": {
         "calories": 1600.0,
         "protein_g": 71.7,
@@ -1743,17 +1743,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 123.66,
+      "solve_time_ms": 122.0,
       "achieved_totals": {
-        "calories": 1989.0,
-        "protein_g": 87.3,
-        "carbs_g": 269.6,
-        "fat_g": 60.5,
-        "cost_inr": 230.0
+        "calories": 1999.0,
+        "protein_g": 79.3,
+        "carbs_g": 278.6,
+        "fat_g": 62.0,
+        "cost_inr": 225.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 11.0,
-      "protein_deviation": 7.3,
+      "calorie_deviation": 1.0,
+      "protein_deviation": 0.7,
       "macro_satisfied": true
     },
     {
@@ -1765,17 +1765,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 147.05,
+      "solve_time_ms": 92.52,
       "achieved_totals": {
-        "calories": 1909.0,
-        "protein_g": 106.6,
-        "carbs_g": 221.8,
-        "fat_g": 67.7,
+        "calories": 1989.0,
+        "protein_g": 87.3,
+        "carbs_g": 269.6,
+        "fat_g": 60.5,
         "cost_inr": 230.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 491.0,
-      "protein_deviation": 33.4,
+      "calorie_deviation": 411.0,
+      "protein_deviation": 52.7,
       "macro_satisfied": false
     },
     {
@@ -1787,7 +1787,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 200.6,
+      "solve_time_ms": 127.11,
       "achieved_totals": {
         "calories": 1405.0,
         "protein_g": 91.5,
@@ -1807,19 +1807,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2600.0,
       "target_protein_g": 170.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 150.49,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 105.88,
       "achieved_totals": {
-        "calories": 1555.0,
-        "protein_g": 46.7,
-        "carbs_g": 228.7,
-        "fat_g": 48.2,
-        "cost_inr": 190.0
+        "calories": 1989.0,
+        "protein_g": 87.3,
+        "carbs_g": 269.6,
+        "fat_g": 60.5,
+        "cost_inr": 230.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 1045.0,
-      "protein_deviation": 123.3,
+      "calorie_deviation": 611.0,
+      "protein_deviation": 82.7,
       "macro_satisfied": false
     },
     {
@@ -1831,7 +1831,7 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 178.35,
+      "solve_time_ms": 116.3,
       "achieved_totals": {
         "calories": 1810.0,
         "protein_g": 98.2,
@@ -1853,7 +1853,7 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 416.4,
+      "solve_time_ms": 256.57,
       "achieved_totals": {
         "calories": 1600.0,
         "protein_g": 71.7,
@@ -1875,18 +1875,18 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 720.72,
+      "solve_time_ms": 443.15,
       "achieved_totals": {
-        "calories": 1995.0,
-        "protein_g": 111.8,
-        "carbs_g": 249.9,
-        "fat_g": 58.6,
-        "cost_inr": 230.0
+        "calories": 1999.0,
+        "protein_g": 80.1,
+        "carbs_g": 251.9,
+        "fat_g": 74.6,
+        "cost_inr": 240.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 5.0,
-      "protein_deviation": 31.8,
-      "macro_satisfied": false
+      "calorie_deviation": 1.0,
+      "protein_deviation": 0.1,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 86,
@@ -1897,7 +1897,7 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 213.96,
+      "solve_time_ms": 152.74,
       "achieved_totals": {
         "calories": 2186.0,
         "protein_g": 125.7,
@@ -1919,17 +1919,17 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 922.6,
+      "solve_time_ms": 697.8,
       "achieved_totals": {
-        "calories": 1397.5,
-        "protein_g": 101.6,
-        "carbs_g": 147.0,
-        "fat_g": 45.0,
-        "cost_inr": 180.0
+        "calories": 1396.0,
+        "protein_g": 90.4,
+        "carbs_g": 156.2,
+        "fat_g": 43.0,
+        "cost_inr": 170.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 2.5,
-      "protein_deviation": 11.6,
+      "calorie_deviation": 4.0,
+      "protein_deviation": 0.4,
       "macro_satisfied": true
     },
     {
@@ -1941,17 +1941,17 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 344.79,
+      "solve_time_ms": 157.68,
       "achieved_totals": {
-        "calories": 2573.0,
-        "protein_g": 122.7,
-        "carbs_g": 94.0,
-        "fat_g": 184.4,
-        "cost_inr": 245.0
+        "calories": 2598.5,
+        "protein_g": 102.7,
+        "carbs_g": 141.3,
+        "fat_g": 176.1,
+        "cost_inr": 200.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 27.0,
-      "protein_deviation": 47.3,
+      "calorie_deviation": 1.5,
+      "protein_deviation": 67.3,
       "macro_satisfied": false
     },
     {
@@ -1963,18 +1963,18 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 407.53,
+      "solve_time_ms": 308.53,
       "achieved_totals": {
-        "calories": 1792.0,
-        "protein_g": 132.3,
-        "carbs_g": 113.7,
-        "fat_g": 87.2,
-        "cost_inr": 245.0
+        "calories": 1791.0,
+        "protein_g": 115.0,
+        "carbs_g": 123.7,
+        "fat_g": 92.5,
+        "cost_inr": 250.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 8.0,
-      "protein_deviation": 22.3,
-      "macro_satisfied": false
+      "calorie_deviation": 9.0,
+      "protein_deviation": 5.0,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 90,
@@ -1985,17 +1985,17 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 655.15,
+      "solve_time_ms": 476.83,
       "achieved_totals": {
-        "calories": 1599.0,
-        "protein_g": 79.6,
-        "carbs_g": 209.9,
-        "fat_g": 50.6,
-        "cost_inr": 185.0
+        "calories": 1600.0,
+        "protein_g": 70.5,
+        "carbs_g": 210.0,
+        "fat_g": 51.0,
+        "cost_inr": 205.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 1.0,
-      "protein_deviation": 9.6,
+      "calorie_deviation": 0.0,
+      "protein_deviation": 0.5,
       "macro_satisfied": true
     },
     {
@@ -2007,17 +2007,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 622.74,
+      "solve_time_ms": 509.52,
       "achieved_totals": {
-        "calories": 2000.0,
-        "protein_g": 94.3,
-        "carbs_g": 249.5,
-        "fat_g": 67.6,
-        "cost_inr": 215.0
+        "calories": 1996.5,
+        "protein_g": 80.1,
+        "carbs_g": 248.7,
+        "fat_g": 73.9,
+        "cost_inr": 230.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 0.0,
-      "protein_deviation": 14.3,
+      "calorie_deviation": 3.5,
+      "protein_deviation": 0.1,
       "macro_satisfied": true
     },
     {
@@ -2029,7 +2029,7 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 179.53,
+      "solve_time_ms": 142.81,
       "achieved_totals": {
         "calories": 2391.0,
         "protein_g": 146.5,
@@ -2051,7 +2051,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 631.56,
+      "solve_time_ms": 368.36,
       "achieved_totals": {
         "calories": 1400.0,
         "protein_g": 89.6,
@@ -2073,17 +2073,17 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 205.64,
+      "solve_time_ms": 119.67,
       "achieved_totals": {
-        "calories": 2484.0,
-        "protein_g": 120.4,
-        "carbs_g": 278.4,
-        "fat_g": 99.0,
+        "calories": 2550.0,
+        "protein_g": 109.0,
+        "carbs_g": 278.2,
+        "fat_g": 110.6,
         "cost_inr": 250.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 116.0,
-      "protein_deviation": 49.6,
+      "calorie_deviation": 50.0,
+      "protein_deviation": 61.0,
       "macro_satisfied": false
     },
     {
@@ -2095,17 +2095,17 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 174.66,
+      "solve_time_ms": 266.37,
       "achieved_totals": {
-        "calories": 1797.0,
-        "protein_g": 117.2,
-        "carbs_g": 78.0,
+        "calories": 1792.0,
+        "protein_g": 107.7,
+        "carbs_g": 87.0,
         "fat_g": 111.0,
-        "cost_inr": 245.0
+        "cost_inr": 240.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 3.0,
-      "protein_deviation": 7.2,
+      "calorie_deviation": 8.0,
+      "protein_deviation": 2.3,
       "macro_satisfied": true
     },
     {
@@ -2117,7 +2117,7 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 831.93,
+      "solve_time_ms": 444.22,
       "achieved_totals": {
         "calories": 1600.0,
         "protein_g": 71.7,
@@ -2139,18 +2139,18 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 251.64,
+      "solve_time_ms": 353.02,
       "achieved_totals": {
-        "calories": 2000.0,
-        "protein_g": 109.5,
-        "carbs_g": 253.9,
-        "fat_g": 61.9,
-        "cost_inr": 240.0
+        "calories": 1999.0,
+        "protein_g": 79.3,
+        "carbs_g": 278.6,
+        "fat_g": 62.0,
+        "cost_inr": 225.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 0.0,
-      "protein_deviation": 29.5,
-      "macro_satisfied": false
+      "calorie_deviation": 1.0,
+      "protein_deviation": 0.7,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 98,
@@ -2161,17 +2161,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 430.32,
+      "solve_time_ms": 332.06,
       "achieved_totals": {
-        "calories": 2376.0,
-        "protein_g": 140.9,
-        "carbs_g": 272.1,
-        "fat_g": 80.6,
-        "cost_inr": 290.0
+        "calories": 2416.0,
+        "protein_g": 139.7,
+        "carbs_g": 267.9,
+        "fat_g": 88.6,
+        "cost_inr": 295.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 24.0,
-      "protein_deviation": 0.9,
+      "calorie_deviation": 16.0,
+      "protein_deviation": 0.3,
       "macro_satisfied": true
     },
     {
@@ -2183,17 +2183,17 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 958.05,
+      "solve_time_ms": 440.76,
       "achieved_totals": {
-        "calories": 1397.5,
-        "protein_g": 101.6,
-        "carbs_g": 147.0,
-        "fat_g": 45.0,
-        "cost_inr": 180.0
+        "calories": 1396.0,
+        "protein_g": 90.4,
+        "carbs_g": 156.2,
+        "fat_g": 43.0,
+        "cost_inr": 170.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 2.5,
-      "protein_deviation": 11.6,
+      "calorie_deviation": 4.0,
+      "protein_deviation": 0.4,
       "macro_satisfied": true
     },
     {
@@ -2205,7 +2205,7 @@
       "target_protein_g": 170.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 208.07,
+      "solve_time_ms": 153.17,
       "achieved_totals": {
         "calories": 2502.0,
         "protein_g": 132.3,
@@ -2227,18 +2227,18 @@
       "target_protein_g": 110.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 378.06,
+      "solve_time_ms": 294.42,
       "achieved_totals": {
-        "calories": 1802.0,
-        "protein_g": 143.1,
-        "carbs_g": 98.0,
-        "fat_g": 96.8,
-        "cost_inr": 295.0
+        "calories": 1797.0,
+        "protein_g": 116.3,
+        "carbs_g": 114.7,
+        "fat_g": 98.0,
+        "cost_inr": 265.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 2.0,
-      "protein_deviation": 33.1,
-      "macro_satisfied": false
+      "calorie_deviation": 3.0,
+      "protein_deviation": 6.3,
+      "macro_satisfied": true
     },
     {
       "scenario_id": 102,
@@ -2249,17 +2249,17 @@
       "target_protein_g": 70.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 566.8,
+      "solve_time_ms": 602.94,
       "achieved_totals": {
-        "calories": 1610.0,
-        "protein_g": 75.0,
-        "carbs_g": 212.0,
-        "fat_g": 49.5,
-        "cost_inr": 170.0
+        "calories": 1600.0,
+        "protein_g": 71.7,
+        "carbs_g": 209.7,
+        "fat_g": 52.9,
+        "cost_inr": 190.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 10.0,
-      "protein_deviation": 5.0,
+      "calorie_deviation": 0.0,
+      "protein_deviation": 1.7,
       "macro_satisfied": true
     },
     {
@@ -2271,17 +2271,17 @@
       "target_protein_g": 80.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 163.24,
+      "solve_time_ms": 129.45,
       "achieved_totals": {
-        "calories": 1989.0,
-        "protein_g": 87.3,
-        "carbs_g": 269.6,
-        "fat_g": 60.5,
-        "cost_inr": 230.0
+        "calories": 1999.0,
+        "protein_g": 79.3,
+        "carbs_g": 278.6,
+        "fat_g": 62.0,
+        "cost_inr": 225.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 11.0,
-      "protein_deviation": 7.3,
+      "calorie_deviation": 1.0,
+      "protein_deviation": 0.7,
       "macro_satisfied": true
     },
     {
@@ -2293,17 +2293,17 @@
       "target_protein_g": 140.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 124.93,
+      "solve_time_ms": 132.99,
       "achieved_totals": {
-        "calories": 1909.0,
-        "protein_g": 106.6,
-        "carbs_g": 221.8,
-        "fat_g": 67.7,
+        "calories": 1989.0,
+        "protein_g": 87.3,
+        "carbs_g": 269.6,
+        "fat_g": 60.5,
         "cost_inr": 230.0
       },
       "budget_satisfaction": true,
-      "calorie_deviation": 491.0,
-      "protein_deviation": 33.4,
+      "calorie_deviation": 411.0,
+      "protein_deviation": 52.7,
       "macro_satisfied": false
     },
     {
@@ -2315,7 +2315,7 @@
       "target_protein_g": 90.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 161.76,
+      "solve_time_ms": 135.24,
       "achieved_totals": {
         "calories": 1405.0,
         "protein_g": 91.5,
@@ -2335,19 +2335,19 @@
       "dietary_preference": "vegan",
       "target_calories": 1800.0,
       "target_protein_g": 120.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 145.48,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 105.98,
       "achieved_totals": {
-        "calories": 1505.0,
-        "protein_g": 59.2,
-        "carbs_g": 206.7,
-        "fat_g": 47.2,
-        "cost_inr": 165.0
+        "calories": 870.0,
+        "protein_g": 33.3,
+        "carbs_g": 132.0,
+        "fat_g": 24.5,
+        "cost_inr": 105.0
       },
       "budget_satisfaction": false,
-      "calorie_deviation": 295.0,
-      "protein_deviation": 60.8,
+      "calorie_deviation": 930.0,
+      "protein_deviation": 86.7,
       "macro_satisfied": false
     },
     {
@@ -2357,19 +2357,19 @@
       "dietary_preference": "vegetarian",
       "target_calories": 1300.0,
       "target_protein_g": 110.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 137.52,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 112.52,
       "achieved_totals": {
-        "calories": 1196.0,
-        "protein_g": 70.2,
-        "carbs_g": 143.0,
-        "fat_g": 37.0,
-        "cost_inr": 165.0
+        "calories": 1020.0,
+        "protein_g": 64.0,
+        "carbs_g": 132.0,
+        "fat_g": 27.5,
+        "cost_inr": 120.0
       },
-      "budget_satisfaction": false,
-      "calorie_deviation": 104.0,
-      "protein_deviation": 39.8,
+      "budget_satisfaction": true,
+      "calorie_deviation": 280.0,
+      "protein_deviation": 46.0,
       "macro_satisfied": false
     },
     {
@@ -2379,19 +2379,19 @@
       "dietary_preference": "vegan",
       "target_calories": 2500.0,
       "target_protein_g": 150.0,
-      "status": "infeasible_fallback",
-      "is_feasible": false,
-      "solve_time_ms": 108.84,
+      "status": "optimal",
+      "is_feasible": true,
+      "solve_time_ms": 135.41,
       "achieved_totals": {
-        "calories": 1555.0,
-        "protein_g": 46.7,
-        "carbs_g": 228.7,
-        "fat_g": 48.2,
-        "cost_inr": 190.0
+        "calories": 1355.0,
+        "protein_g": 73.0,
+        "carbs_g": 186.0,
+        "fat_g": 34.0,
+        "cost_inr": 150.0
       },
-      "budget_satisfaction": false,
-      "calorie_deviation": 945.0,
-      "protein_deviation": 103.3,
+      "budget_satisfaction": true,
+      "calorie_deviation": 1145.0,
+      "protein_deviation": 77.0,
       "macro_satisfied": false
     },
     {
@@ -2403,7 +2403,7 @@
       "target_protein_g": 180.0,
       "status": "optimal",
       "is_feasible": true,
-      "solve_time_ms": 134.89,
+      "solve_time_ms": 111.76,
       "achieved_totals": {
         "calories": 2976.0,
         "protein_g": 181.5,

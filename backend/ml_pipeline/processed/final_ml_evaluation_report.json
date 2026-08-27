@@ -1,5 +1,5 @@
 {
-  "evaluation_timestamp": "2026-08-28T03:35:54.161513",
+  "evaluation_timestamp": "2026-08-28T03:39:28.657422",
   "models": {
     "kmeans_user_clustering": {
       "status": "EVALUATED",
@@ -39,10 +39,10 @@
       "db_records_evaluated": 317,
       "scenarios_tested": 109,
       "metrics": {
-        "feasibility_rate_pct": 69.72,
-        "budget_compliance_rate_pct": 71.56,
-        "average_solve_time_ms": 273.47,
-        "max_solve_time_ms": 958.05
+        "feasibility_rate_pct": 100.0,
+        "budget_compliance_rate_pct": 76.15,
+        "average_solve_time_ms": 199.77,
+        "max_solve_time_ms": 775.55
       }
     },
     "progress_predictor": {
