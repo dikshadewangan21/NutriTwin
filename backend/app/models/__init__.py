@@ -1,7 +1,7 @@
 from app.database import Base
 from app.models.user import User, UserProfile
 from app.models.food import FoodItem, SubstitutionRule
-from app.models.log import DailyIntakeLog, MealPlan, MealPlanItem, FeedbackLog, ModelMetric
+from app.models.log import DailyIntakeLog, MealPlan, MealPlanItem, FeedbackLog, ModelMetric, RecommendationInteraction
 from app.models.health import HealthCondition, ConditionNutritionRule, UserHealthProfile
 
 __all__ = [
@@ -15,6 +15,7 @@ __all__ = [
     "MealPlanItem",
     "FeedbackLog",
     "ModelMetric",
+    "RecommendationInteraction",
     "HealthCondition",
     "ConditionNutritionRule",
     "UserHealthProfile"

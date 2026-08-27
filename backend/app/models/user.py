@@ -19,6 +19,8 @@ class User(Base):
     intake_logs = relationship("DailyIntakeLog", back_populates="user", cascade="all, delete-orphan")
     meal_plans = relationship("MealPlan", back_populates="user", cascade="all, delete-orphan")
     feedback_logs = relationship("FeedbackLog", back_populates="user", cascade="all, delete-orphan")
+    recommendation_interactions = relationship("RecommendationInteraction", back_populates="user", cascade="all, delete-orphan")
+
 
 
 class UserProfile(Base):

@@ -1,0 +1,14 @@
+{
+  "exported_at": "2026-08-26T21:15:35.363584",
+  "output_csv": "C:\\Users\\dewan\\Downloads\\Diet Recommendation\\backend\\ml_pipeline\\datasets\\interactions\\user_meal_interactions.csv",
+  "total_logged_interactions": 16,
+  "interaction_counts": {
+    "shown": 16,
+    "clicked": 16,
+    "consumed": 16,
+    "skipped": 0,
+    "swapped": 0
+  },
+  "sufficient_data_for_collaborative_filtering": false,
+  "recommendation": "Collaborative filtering model training requires >= 1000 real interactions with >= 200 consumed/rated items."
+}

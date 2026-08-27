@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any
+from datetime import datetime
 
 from app.database import get_db
 from app.models.user import User, UserProfile
 from app.models.food import FoodItem
-from app.models.log import FeedbackLog
+from app.models.log import FeedbackLog, RecommendationInteraction
 from app.schemas.food import FoodItemSchema, SubstituteRequest
-from app.schemas.recommend import SingleMealSwapRequest
+from app.schemas.recommend import SingleMealSwapRequest, InteractionLogRequest, InteractionLogResponse
 from app.api.auth import get_current_user
 from app.ml.hybrid_recommender import hybrid_recommender
 from app.ml.adaptive_engine import adaptive_engine
@@ -49,6 +50,8 @@ def get_daily_recommendations(
     }
 
     meal_recommendations = {}
+    interaction_records = []
+
     for slot in ["breakfast", "lunch", "dinner", "snack"]:
         ranked = hybrid_recommender.score_and_rank_foods(
             safe_foods,
@@ -61,7 +64,7 @@ def get_daily_recommendations(
         # Apply adaptive online learning adjustments
         adapted_ranked = adaptive_engine.update_item_weights(ranked, f_hist)
         
-        # Format top 3 options per slot
+        top_3 = adapted_ranked[:3]
         meal_recommendations[slot] = [
             {
                 "food": FoodItemSchema.model_validate(item["food"]),
@@ -71,8 +74,35 @@ def get_daily_recommendations(
                     item["food"], item, profile, target_macros
                 )
             }
-            for item in adapted_ranked[:3]
+            for item in top_3
         ]
+
+        # Log recommendation interaction (shown=True) in database
+        for rank_idx, item in enumerate(top_3, 1):
+            interaction_records.append(
+                RecommendationInteraction(
+                    user_id=current_user.id,
+                    food_id=item["food"].id,
+                    shown=True,
+                    clicked=False,
+                    consumed=False,
+                    skipped=False,
+                    swapped=False,
+                    context={
+                        "meal_type": slot,
+                        "rank_position": rank_idx,
+                        "recommendation_score": item["score"],
+                        "source": "hybrid_recommender"
+                    }
+                )
+            )
+
+    try:
+        db.add_all(interaction_records)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        print(f"[Interaction Log Warning] {e}")
 
     return {
         "user_id": current_user.id,
@@ -95,6 +125,21 @@ def get_smart_substitute(
 
     substitutes = substitute_engine.find_substitutes(target_food, all_foods, profile)
     
+    # Log swap/substitute request interaction
+    try:
+        interaction = RecommendationInteraction(
+            user_id=current_user.id,
+            food_id=req.food_id,
+            shown=True,
+            clicked=True,
+            swapped=True,
+            context={"action": "requested_substitute"}
+        )
+        db.add(interaction)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+
     return {
         "original_food": FoodItemSchema.model_validate(target_food),
         "recommended_substitutes": [
@@ -106,6 +151,49 @@ def get_smart_substitute(
             }
             for s in substitutes
         ]
+    }
+
+@router.post("/interaction", response_model=InteractionLogResponse)
+def log_user_interaction(
+    req: InteractionLogRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Log or update real user recommendation interaction (shown, clicked, consumed, skipped, swapped, rating).
+    """
+    food = db.query(FoodItem).filter(FoodItem.id == req.food_id).first()
+    if not food:
+        raise HTTPException(status_code=404, detail="Food item not found.")
+
+    interaction = RecommendationInteraction(
+        user_id=current_user.id,
+        food_id=req.food_id,
+        timestamp=datetime.utcnow(),
+        shown=req.shown,
+        clicked=req.clicked,
+        consumed=req.consumed,
+        skipped=req.skipped,
+        swapped=req.swapped,
+        rating=req.rating,
+        context=req.context
+    )
+    db.add(interaction)
+    db.commit()
+    db.refresh(interaction)
+
+    return {
+        "interaction_id": interaction.id,
+        "user_id": interaction.user_id,
+        "food_id": interaction.food_id,
+        "timestamp": interaction.timestamp.isoformat(),
+        "shown": interaction.shown,
+        "clicked": interaction.clicked,
+        "consumed": interaction.consumed,
+        "skipped": interaction.skipped,
+        "swapped": interaction.swapped,
+        "rating": interaction.rating,
+        "context": interaction.context or {}
     }
 
 @router.get("/explain/{food_id}")

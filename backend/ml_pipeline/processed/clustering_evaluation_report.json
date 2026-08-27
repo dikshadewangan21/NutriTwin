@@ -1,0 +1,144 @@
+{
+  "hyperparameter_search": [
+    {
+      "k": 2,
+      "inertia": 29638.38,
+      "silhouette_score": 0.2526,
+      "davies_bouldin_index": 1.616
+    },
+    {
+      "k": 3,
+      "inertia": 24669.14,
+      "silhouette_score": 0.2401,
+      "davies_bouldin_index": 1.4732
+    },
+    {
+      "k": 4,
+      "inertia": 22387.8,
+      "silhouette_score": 0.1873,
+      "davies_bouldin_index": 1.6513
+    },
+    {
+      "k": 5,
+      "inertia": 20410.96,
+      "silhouette_score": 0.1924,
+      "davies_bouldin_index": 1.5651
+    },
+    {
+      "k": 6,
+      "inertia": 18865.41,
+      "silhouette_score": 0.1916,
+      "davies_bouldin_index": 1.4524
+    },
+    {
+      "k": 7,
+      "inertia": 17524.37,
+      "silhouette_score": 0.2043,
+      "davies_bouldin_index": 1.5122
+    },
+    {
+      "k": 8,
+      "inertia": 16579.07,
+      "silhouette_score": 0.2022,
+      "davies_bouldin_index": 1.4292
+    },
+    {
+      "k": 9,
+      "inertia": 15774.55,
+      "silhouette_score": 0.2115,
+      "davies_bouldin_index": 1.4192
+    },
+    {
+      "k": 10,
+      "inertia": 15048.54,
+      "silhouette_score": 0.2166,
+      "davies_bouldin_index": 1.4317
+    }
+  ],
+  "selected_k": 6,
+  "final_metrics": {
+    "silhouette_score": 0.1916,
+    "davies_bouldin_index": 1.4524,
+    "inertia": 18865.41
+  },
+  "cluster_profiles": {
+    "0": {
+      "cluster_id": 0,
+      "label": "Weight-Loss Focused",
+      "description": "Lower calorie target, high fiber priority, moderate activity.",
+      "sample_count": 766,
+      "sample_pct": 15.7,
+      "centroids": {
+        "mean_age": 36.3,
+        "mean_bmi": 33.9,
+        "mean_daily_calories": 1589.4,
+        "mean_protein_g": 58.6
+      }
+    },
+    "1": {
+      "cluster_id": 1,
+      "label": "Muscle & Fitness Focused",
+      "description": "High protein requirement, high TDEE, active lifestyle with strength goals.",
+      "sample_count": 979,
+      "sample_pct": 20.0,
+      "centroids": {
+        "mean_age": 44.9,
+        "mean_bmi": 21.9,
+        "mean_daily_calories": 1726.6,
+        "mean_protein_g": 64.1
+      }
+    },
+    "2": {
+      "cluster_id": 2,
+      "label": "Weight Maintenance",
+      "description": "Balanced macronutrient distribution, steady weight maintenance.",
+      "sample_count": 807,
+      "sample_pct": 16.5,
+      "centroids": {
+        "mean_age": 54.8,
+        "mean_bmi": 29.7,
+        "mean_daily_calories": 2276.4,
+        "mean_protein_g": 83.1
+      }
+    },
+    "3": {
+      "cluster_id": 3,
+      "label": "Budget-Conscious Nutritionist",
+      "description": "High protein density and essential nutrition on a lean daily food budget.",
+      "sample_count": 540,
+      "sample_pct": 11.1,
+      "centroids": {
+        "mean_age": 42.6,
+        "mean_bmi": 28.7,
+        "mean_daily_calories": 4048.9,
+        "mean_protein_g": 158.2
+      }
+    },
+    "4": {
+      "cluster_id": 4,
+      "label": "Low-Activity Wellness",
+      "description": "Sedentary lifestyle requiring controlled carbohydrate intake.",
+      "sample_count": 1093,
+      "sample_pct": 22.4,
+      "centroids": {
+        "mean_age": 63.3,
+        "mean_bmi": 32.0,
+        "mean_daily_calories": 1421.2,
+        "mean_protein_g": 53.7
+      }
+    },
+    "5": {
+      "cluster_id": 5,
+      "label": "High-Protein Vegetarian",
+      "description": "Plant-based or vegetarian diet with high fiber and plant protein focus.",
+      "sample_count": 701,
+      "sample_pct": 14.3,
+      "centroids": {
+        "mean_age": 48.8,
+        "mean_bmi": 33.7,
+        "mean_daily_calories": 2712.5,
+        "mean_protein_g": 104.3
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "raw_records": 255,
+  "cleaned_records": 255,
+  "matched_records": 53,
+  "unmatched_records": 202,
+  "duplicate_records": 0,
+  "invalid_records": 0,
+  "seed_database_items_count": 63,
+  "output_cleaned_json": "C:\\Users\\dewan\\Downloads\\Diet Recommendation\\backend\\ml_pipeline\\processed\\indian_food_cleaned.json"
+}

@@ -1,0 +1,57 @@
+{
+  "evaluation_timestamp": "2026-08-27T02:44:56.744715",
+  "models": {
+    "kmeans_user_clustering": {
+      "status": "EVALUATED",
+      "dataset": "NHANES 2017-2018 Official Demographic & Dietary Recall Dataset",
+      "sample_count": 4886,
+      "num_clusters": 6,
+      "metrics": {
+        "silhouette_score": 0.1916,
+        "davies_bouldin_index": 1.4524,
+        "inertia": 18865.41
+      }
+    },
+    "vision_classifier": {
+      "status": "EVALUATED",
+      "architecture": "MobileNetV3_Small",
+      "test_split_size": 1336,
+      "num_classes": 20,
+      "metrics": {
+        "top1_accuracy": 0.8825,
+        "top5_accuracy": 0.9753,
+        "macro_precision": 0.8797,
+        "macro_recall": 0.8723,
+        "macro_f1": 0.8735
+      }
+    },
+    "rag_faiss_engine": {
+      "status": "EVALUATED",
+      "indexed_chunks": 95,
+      "metrics": {
+        "retrieval_relevance": 0.5912,
+        "groundedness_pct": 100.0,
+        "answer_relevance_pct": 100.0
+      }
+    },
+    "pulp_optimizer": {
+      "status": "EVALUATED",
+      "db_records_evaluated": 317,
+      "scenarios_tested": 109,
+      "metrics": {
+        "feasibility_rate_pct": 69.72,
+        "budget_compliance_rate_pct": 71.56,
+        "average_solve_time_ms": 273.47,
+        "max_solve_time_ms": 958.05
+      }
+    },
+    "progress_predictor": {
+      "status": "NOT EVALUATED — insufficient real data",
+      "reason": "Dataset lacks longitudinal multi-week weight series across users (audited 30-day snapshot dataset contains <=2 logs for 75%+ participants)."
+    },
+    "collaborative_recommender": {
+      "status": "NOT EVALUATED — insufficient real data",
+      "reason": "Real interaction logging active in database (user_meal_interactions.csv); collaborative filtering model training gated until >= 1000 real user interactions accumulate in production."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dimension": 384,
+  "total_vectors": 95,
+  "metric": "cosine",
+  "index_type": "IndexFlatIP",
+  "metadata_fields": [
+    "chunk_id",
+    "source",
+    "source_url",
+    "title",
+    "condition",
+    "category",
+    "original_file",
+    "text"
+  ]
+}

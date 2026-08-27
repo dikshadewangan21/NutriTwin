@@ -95,3 +95,24 @@ class ModelMetric(Base):
     metric_value = Column(Float, nullable=False)
     details = Column(JSON, default=dict)
     evaluated_at = Column(DateTime, default=datetime.utcnow)
+
+
+class RecommendationInteraction(Base):
+    __tablename__ = "recommendation_interactions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    food_id = Column(Integer, ForeignKey("food_items.id"), nullable=False, index=True)
+    timestamp = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+
+    shown = Column(Boolean, default=True)
+    clicked = Column(Boolean, default=False)
+    consumed = Column(Boolean, default=False)
+    skipped = Column(Boolean, default=False)
+    swapped = Column(Boolean, default=False)
+
+    rating = Column(Float, nullable=True)
+    context = Column(JSON, default=dict)
+
+    user = relationship("User", back_populates="recommendation_interactions")
+

@@ -1,0 +1,22 @@
+{
+  "raw_total_respondents": 9254,
+  "merged_respondents": 8704,
+  "adult_respondents": 5533,
+  "cleaned_valid_profiles": 4886,
+  "features": [
+    "seqn",
+    "age",
+    "gender",
+    "weight_kg",
+    "height_cm",
+    "bmi",
+    "daily_calories",
+    "protein_g",
+    "carbs_g",
+    "fat_g",
+    "fiber_g",
+    "activity_score",
+    "activity_level"
+  ],
+  "output_csv": "C:\\Users\\dewan\\Downloads\\Diet Recommendation\\backend\\ml_pipeline\\processed\\nhanes_user_profiles_cleaned.csv"
+}
