@@ -333,7 +333,7 @@ class GroundedRAGAssistant:
         is_replacement_query = any(w in query_lower for w in ["replace", "substitute", "instead", "don't have", "swap", "alternative"])
 
         # 5. Perform FAISS Vector Search
-        rag_chunks = self.retriever.retrieve(query_raw, top_k=3, min_score=0.40)
+        rag_chunks = self.retriever.retrieve(query_raw, top_k=3, min_score=0.35)
 
         response_text = ""
         intent_detected = "general_query"

@@ -92,7 +92,7 @@ User Persona      Hybrid AI            Weekly LP             Learned            
 
 4. GROUNDED FAISS VECTOR RAG ENGINE
    • Indexed Chunks:        95 Authoritative NIDDK Clinical Document Chunks
-   • Mean Retrieval Score:  0.5912 (Cosine Similarity)
+   • Mean Retrieval Score:  0.4971 (Cosine Similarity)
    • Groundedness Rate:     100.0% (100% NIDDK title & URL citations)
 
 5. PREDICTIVE WEIGHT PROGRESS FORECASTING (PHASE 6)

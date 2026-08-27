@@ -1,5 +1,5 @@
 {
-  "evaluation_timestamp": "2026-08-28T03:39:28.657422",
+  "evaluation_timestamp": "2026-08-28T03:42:26.854863",
   "models": {
     "kmeans_user_clustering": {
       "status": "EVALUATED",
@@ -27,12 +27,15 @@
     },
     "rag_faiss_engine": {
       "status": "EVALUATED",
-      "indexed_chunks": 95,
+      "benchmark_questions_tested": 40,
+      "indexed_niddk_chunks": 95,
       "metrics": {
-        "retrieval_relevance": 0.5912,
-        "groundedness_pct": 100.0,
-        "answer_relevance_pct": 100.0
-      }
+        "retrieval_relevance": 0.4971,
+        "context_relevance": 0.4458,
+        "groundedness_rate_pct": 100.0,
+        "answer_relevance_pass_rate_pct": 77.5
+      },
+      "failing_query_count": 9
     },
     "pulp_optimizer": {
       "status": "EVALUATED",
