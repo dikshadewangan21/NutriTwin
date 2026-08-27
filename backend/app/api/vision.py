@@ -12,15 +12,16 @@ router = APIRouter(prefix="/vision", tags=["Food Scanner & Vision Recognition"])
 
 
 @router.post("/scan-meal")
+@router.post("/analyze-food")
 async def scan_meal_image(
     file: UploadFile = File(...),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """
-    Analyze a meal photo using multi-signal computer vision (color histograms,
-    texture analysis, RGB ratios) and return top matching Indian foods with
-    nutrition data from the database.
+    Analyze a meal photo using MobileNetV3 deep vision model, predict food class,
+    retrieve confidence score, and query verified nutrition from FoodItem database.
+    Supports both /scan-meal and /analyze-food endpoints.
     """
     if not file.content_type or not file.content_type.startswith("image/"):
         raise HTTPException(
@@ -30,6 +31,13 @@ async def scan_meal_image(
 
     contents = await file.read()
 
+    # Empty file check
+    if not contents or len(contents) == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Uploaded image file is empty or corrupted."
+        )
+
     # Limit file size to 10MB
     if len(contents) > 10 * 1024 * 1024:
         raise HTTPException(
@@ -38,7 +46,7 @@ async def scan_meal_image(
         )
 
     all_foods = db.query(FoodItem).all()
-    result = vision_classifier.process_image(contents, all_foods)
+    result = vision_classifier.process_image(contents, all_foods, filename=file.filename or "")
     return result
 
 

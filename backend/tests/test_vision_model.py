@@ -101,3 +101,109 @@ def test_scan_meal_api_endpoint():
     required_keys = ["food_id", "name", "category", "calories", "protein_g", "carbs_g", "fat_g", "fiber_g", "confidence_pct"]
     for k in required_keys:
         assert k in detected, f"Scan meal response missing key '{k}'"
+
+
+# -----------------------------------------------------------------------------
+# End-to-End Tests for /api/v1/vision/analyze-food (6 Verification Scenarios)
+# -----------------------------------------------------------------------------
+
+def test_analyze_food_valid_image():
+    """Verify Scenario 1: Valid image flow (Image -> MobileNetV3 -> Food class -> Confidence -> DB Lookup -> Nutrition)."""
+    token = create_access_token(user_id=1, email="test@nutritwin.ai")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    img = Image.new("RGB", (224, 224), color=(210, 140, 70))
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format="JPEG")
+    img_bytes = img_byte_arr.getvalue()
+
+    files = {"file": ("samosa.jpg", img_bytes, "image/jpeg")}
+
+    res = client.post("/api/v1/vision/analyze-food", headers=headers, files=files)
+    assert res.status_code == 200, f"Valid image analyze-food failed: {res.text}"
+
+    data = res.json()
+    assert data["success"] is True
+    assert "detected_food" in data
+    assert "top_candidates" in data
+
+    detected = data["detected_food"]
+    assert "food_id" in detected
+    assert "name" in detected
+    assert "confidence_pct" in detected
+    assert detected["confidence_pct"] > 0
+    # Verify nutrition parameters come from DB lookup
+    assert "calories" in detected
+    assert "protein_g" in detected
+    assert "carbs_g" in detected
+    assert "fat_g" in detected
+    assert "disclaimer" in data
+
+
+def test_analyze_food_invalid_image():
+    """Verify Scenario 2: Invalid/corrupted image upload."""
+    token = create_access_token(user_id=1, email="test@nutritwin.ai")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Empty bytes file
+    files = {"file": ("empty.jpg", b"", "image/jpeg")}
+    res = client.post("/api/v1/vision/analyze-food", headers=headers, files=files)
+    assert res.status_code == 400
+    assert "empty or corrupted" in res.json()["detail"].lower()
+
+
+def test_analyze_food_unsupported_format():
+    """Verify Scenario 3: Unsupported file format (e.g. text/plain or pdf)."""
+    token = create_access_token(user_id=1, email="test@nutritwin.ai")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    files = {"file": ("document.pdf", b"%PDF-1.4 header text content", "application/pdf")}
+    res = client.post("/api/v1/vision/analyze-food", headers=headers, files=files)
+    assert res.status_code == 400
+    assert "upload an image file" in res.json()["detail"].lower()
+
+
+def test_analyze_food_low_confidence_prediction():
+    """Verify Scenario 4: Low-confidence prediction handles threshold gracefully with top_candidates & user_editable: True."""
+    token = create_access_token(user_id=1, email="test@nutritwin.ai")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    # Uniform gray image (ambiguous visual features)
+    img = Image.new("RGB", (224, 224), color=(128, 128, 128))
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format="JPEG")
+    img_bytes = img_byte_arr.getvalue()
+
+    files = {"file": ("ambiguous.jpg", img_bytes, "image/jpeg")}
+    res = client.post("/api/v1/vision/analyze-food", headers=headers, files=files)
+    assert res.status_code == 200
+
+    data = res.json()
+    assert data["user_editable"] is True
+    assert len(data["top_candidates"]) > 0
+
+
+def test_analyze_food_unknown_food_and_search_override():
+    """Verify Scenario 5: Unknown food item allows fuzzy search override via /api/v1/vision/food-search."""
+    token = create_access_token(user_id=1, email="test@nutritwin.ai")
+    headers = {"Authorization": f"Bearer {token}"}
+
+    res = client.get("/api/v1/vision/food-search?q=Paneer", headers=headers)
+    assert res.status_code == 200
+    data = res.json()
+    assert data["results_count"] > 0
+    assert any("paneer" in r["name"].lower() for r in data["results"])
+
+
+def test_process_image_db_lookup_failure_handling():
+    """Verify Scenario 6: Database lookup failure (empty food_db_items) is handled safely without crashing."""
+    img = Image.new("RGB", (224, 224), color=(150, 100, 50))
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format="JPEG")
+    img_bytes = img_byte_arr.getvalue()
+
+    # Pass empty DB list to classifier
+    result = vision_classifier.process_image(img_bytes, food_db_items=[], filename="test.jpg")
+    assert "detected_food" in result
+    assert result["user_editable"] is True
+
