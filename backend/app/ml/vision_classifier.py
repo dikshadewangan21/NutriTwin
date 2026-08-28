@@ -188,7 +188,7 @@ class FoodVisionClassifier:
             "Masala Dosa": "Masala Dosa with Coconut Chutney",
             "Butter Naan": "Naan",
             "Chapati": "Roti",
-            "Chole Bhature": "Chana Masala",
+            "Chole Bhature": "Chole Bhature",
             "Dal Makhani": "Dal Makhani",
             "Kadai Paneer": "Kadai Paneer",
             "Pav Bhaji": "Pav Bhaji",
@@ -200,12 +200,18 @@ class FoodVisionClassifier:
             "Jalebi": "Jalebi",
             "Samosa": "Samosa",
             "Pakode": "Pakora",
-            "Fried Rice": "Veg Fried Rice"
+            "Fried Rice": "Veg Fried Rice",
+            "Burger": "Veg Burger",
+            "Pizza": "Veg Pizza",
+            "Momos": "Steamed Veg Momos"
         }
         return mappings.get(clean, clean)
 
     def _find_food_in_db(self, pred_class_name: str, food_db_items: list) -> any:
         """Find matching FoodItem in DB for a predicted class name."""
+        if not food_db_items:
+            return None
+
         clean_target = self._format_class_name(pred_class_name).lower()
 
         # 1. Exact match
@@ -216,7 +222,7 @@ class FoodVisionClassifier:
         # 2. Fuzzy token set match
         db_names = {item.name: item for item in food_db_items}
         match = rfuzz_process.extractOne(clean_target, list(db_names.keys()), scorer=fuzz.token_set_ratio)
-        if match and match[1] >= 65:
+        if match and match[1] >= 60:
             return db_names[match[0]]
 
         # 3. Substring match
@@ -224,7 +230,7 @@ class FoodVisionClassifier:
             if len(clean_target) >= 4 and (clean_target in item.name.lower() or item.name.lower() in clean_target):
                 return item
 
-        return food_db_items[0] if food_db_items else None
+        return None
 
     def process_image(self, image_bytes: bytes, food_db_items: list, filename: str = "") -> dict:
         """
@@ -240,6 +246,8 @@ class FoodVisionClassifier:
             img_resized_small = img.resize((128, 128), Image.LANCZOS)
             img_arr = np.array(img_resized_small) / 255.0
             features = _extract_visual_features(img_arr)
+
+            disclaimer_str = "Image recognition provides food item identification. Calories and nutrition are estimated from standard database portion sizes, not directly measured from image pixels."
 
             # Option A: Trained PyTorch MobileNetV3 Inference
             if self.is_model_loaded and self.model is not None and self.eval_transform is not None:
@@ -282,15 +290,50 @@ class FoodVisionClassifier:
                         })
 
                 top_match = top_candidates[0] if top_candidates else None
-                notes = [
-                    f"MobileNetV3 Deep Vision classifier recognized '{top_match['name']}' with {top_match['confidence_pct']}% confidence.",
-                    "Nutrition values retrieved directly from official NutriTwin FoodItem database."
-                ]
+
+                # Handle low-confidence predictions or missing top match
+                is_confident = True
+                status_msg = "Food recognized successfully"
+                if not top_match or top_match["confidence_pct"] < 50.0:
+                    is_confident = False
+                    status_msg = "Unable to confidently identify this food"
+                    notes = [
+                        "Unable to confidently identify this food (confidence < 50%).",
+                        "Please select the correct food from the candidate list or search manually below."
+                    ]
+                else:
+                    status_msg = f"Identified '{top_match['name']}' ({top_match['confidence_pct']}% confidence)"
+                    notes = [
+                        f"MobileNetV3 Deep Vision recognized '{top_match['name']}' with {top_match['confidence_pct']}% confidence.",
+                        "Nutrition values retrieved directly from official NutriTwin FoodItem database."
+                    ]
+
+                # Fallback candidate if top_match was None
+                if not top_match and food_db_items:
+                    fallback_item = food_db_items[0]
+                    top_match = {
+                        "food_id": fallback_item.id,
+                        "name": fallback_item.name,
+                        "name_hindi": getattr(fallback_item, "name_hindi", ""),
+                        "category": fallback_item.category,
+                        "estimated_serving": fallback_item.serving_unit,
+                        "estimated_weight_g": fallback_item.serving_weight_g,
+                        "calories": fallback_item.calories,
+                        "protein_g": fallback_item.protein_g,
+                        "carbs_g": fallback_item.carbs_g,
+                        "fat_g": fallback_item.fat_g,
+                        "fiber_g": fallback_item.fiber_g,
+                        "confidence_pct": 35.0,
+                        "ingredients": getattr(fallback_item, "ingredients", []),
+                        "description": getattr(fallback_item, "description", ""),
+                    }
 
                 return {
                     "success": True,
+                    "is_confident": is_confident,
+                    "status_message": status_msg,
                     "detected_food": top_match,
-                    "top_candidates": top_candidates[:5],
+                    "top_candidates": top_candidates[:5] if top_candidates else [top_match],
                     "image_resolution": original_size,
                     "visual_features": {
                         "dominant_hue_deg": round(features["dom_hue"], 1),
@@ -302,7 +345,7 @@ class FoodVisionClassifier:
                     },
                     "detection_notes": notes,
                     "user_editable": True,
-                    "disclaimer": "Photo recognition powered by MobileNetV3 deep vision model. Nutrition retrieved from database."
+                    "disclaimer": disclaimer_str
                 }
 
             # Option B: Fallback Heuristic Classifier Engine

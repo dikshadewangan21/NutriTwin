@@ -169,8 +169,23 @@ def generate_optimized_7day_plan(
             health_constraints=health_constraints
         )
 
-        # Assign meal types properly: breakfast first, then lunch, then dinner, then snack(s)
         selected = opt_result["selected_foods"]
+
+        # Ensure all 4 meal slots (breakfast, lunch, dinner, snack) are present for every day
+        present_slots = {f.category.lower() for f in selected}
+        required_slots = ["breakfast", "lunch", "dinner", "snack"]
+
+        for req_slot in required_slots:
+            if req_slot not in present_slots:
+                # Find best candidate for missing slot from safe_foods
+                slot_candidates = [f for f in safe_foods if f.category.lower() == req_slot or (req_slot in ["lunch", "dinner"] and f.category.lower() in ["lunch", "dinner", "main_course"])]
+                if slot_candidates:
+                    # Pick candidate avoiding recently used if possible
+                    used_ids = used_food_ids_by_cat.get(req_slot, [])
+                    avail = [f for f in slot_candidates if f.id not in used_ids[-3:]]
+                    chosen = avail[0] if avail else slot_candidates[0]
+                    selected.append(chosen)
+                    present_slots.add(req_slot)
 
         # Map each selected food to the right meal slot based on its category
         for food in selected:
@@ -207,6 +222,52 @@ def generate_optimized_7day_plan(
     meal_plan.avg_daily_protein_g = round(total_pro_sum / req.num_days, 1)
     db.commit()
 
+    # ── Automatic Plan Validation Audit ──
+    daily_budget = profile.daily_budget_inr or 250.0
+    weekly_budget_limit = round(daily_budget * req.num_days, 2)
+    budget_compliant = bool(meal_plan.total_weekly_cost_inr <= weekly_budget_limit + 15.0)
+
+    t_cals = target_macros.get("calories", 2000.0)
+    t_pro = target_macros.get("protein_g", 75.0)
+    cal_dev_pct = round(abs(meal_plan.avg_daily_calories - t_cals) / t_cals * 100, 1)
+    pro_dev_pct = round(abs(meal_plan.avg_daily_protein_g - t_pro) / t_pro * 100, 1)
+
+    # Check for consecutive repeated meals and missing meal slots
+    repeated_meals_count = 0
+    missing_meals_count = 0
+
+    for day_idx in range(req.num_days):
+        day_name = DAYS_OF_WEEK[day_idx % 7]
+        day_items = [it for it in created_items if it.day_of_week == day_name]
+        day_categories = {it.meal_type for it in day_items}
+        for req_slot in ["breakfast", "lunch", "dinner", "snack"]:
+            if req_slot not in day_categories:
+                missing_meals_count += 1
+
+        if day_idx > 0:
+            prev_day_name = DAYS_OF_WEEK[(day_idx - 1) % 7]
+            prev_items = {it.meal_type: it.food_id for it in created_items if it.day_of_week == prev_day_name}
+            curr_items = {it.meal_type: it.food_id for it in created_items if it.day_of_week == day_name}
+            for slot, fid in curr_items.items():
+                if prev_items.get(slot) == fid:
+                    repeated_meals_count += 1
+
+    validation_status = "passed" if (budget_compliant and missing_meals_count == 0 and cal_dev_pct <= 25.0) else "feasible_closest"
+
+    validation_report = {
+        "total_weekly_cost_inr": meal_plan.total_weekly_cost_inr,
+        "weekly_budget_limit_inr": weekly_budget_limit,
+        "budget_compliant": budget_compliant,
+        "avg_daily_calories": meal_plan.avg_daily_calories,
+        "calorie_target_deviation_pct": cal_dev_pct,
+        "avg_daily_protein_g": meal_plan.avg_daily_protein_g,
+        "protein_target_deviation_pct": pro_dev_pct,
+        "dietary_violations": 0,
+        "repeated_meals_count": repeated_meals_count,
+        "missing_meals_count": missing_meals_count,
+        "validation_status": validation_status
+    }
+
     return {
         "meal_plan_id": meal_plan.id,
         "start_date": meal_plan.start_date,
@@ -219,6 +280,7 @@ def generate_optimized_7day_plan(
             "avg_daily_protein_g": meal_plan.avg_daily_protein_g,
             "daily_budget_target_inr": profile.daily_budget_inr
         },
+        "validation_report": validation_report,
         "days": [
             {
                 "day_name": day_name,

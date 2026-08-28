@@ -360,32 +360,66 @@ class GroundedRAGAssistant:
                 for c in rag_chunks
             ]
 
-        # --- A. Budget & Cost Optimization ---
-        if is_budget_query:
-            intent_detected = "budget_optimization"
-            target_limit = max_cost_constraint or rem_budget
-            affordable_dishes = [f for f in valid_foods_sorted if f.approx_cost_inr <= target_limit][:4]
+        # --- A. Budget & Full Day Meal Plan Intent ---
+        is_day_plan_query = any(w in query_lower for w in [
+            "full day", "day plan", "daily plan", "full plan", "whole day", "plan for the day", "day meal"
+        ])
 
-            if affordable_dishes:
+        if is_day_plan_query or is_budget_query:
+            intent_detected = "budget_meal_planning" if is_day_plan_query else "budget_optimization"
+            target_limit = max_cost_constraint or rem_budget or 100.0
+
+            if is_day_plan_query:
+                # Construct a realistic full-day human plan (Breakfast, Lunch, Dinner, Snack)
+                bf_candidates = [f for f in valid_foods_sorted if f.category.lower() == "breakfast" and f.approx_cost_inr <= target_limit * 0.30]
+                lunch_candidates = [f for f in valid_foods_sorted if f.category.lower() in ["lunch", "main_course"] and f.approx_cost_inr <= target_limit * 0.40]
+                dinner_candidates = [f for f in valid_foods_sorted if f.category.lower() in ["dinner", "lunch", "main_course"] and f.approx_cost_inr <= target_limit * 0.35]
+                snack_candidates = [f for f in valid_foods_sorted if f.category.lower() in ["snack", "beverage"] and f.approx_cost_inr <= target_limit * 0.20]
+
+                bf = bf_candidates[0] if bf_candidates else valid_foods_sorted[0]
+                lunch = lunch_candidates[0] if lunch_candidates else (valid_foods_sorted[1] if len(valid_foods_sorted) > 1 else bf)
+                snack = snack_candidates[0] if snack_candidates else (valid_foods_sorted[2] if len(valid_foods_sorted) > 2 else bf)
+                
+                # Avoid dinner repeating lunch
+                dinner = None
+                for d in dinner_candidates:
+                    if d.id != lunch.id and d.id != bf.id:
+                        dinner = d
+                        break
+                if not dinner:
+                    dinner = valid_foods_sorted[3] if len(valid_foods_sorted) > 3 else bf
+
+                tot_cost = round(bf.approx_cost_inr + lunch.approx_cost_inr + snack.approx_cost_inr + dinner.approx_cost_inr, 1)
+                tot_cals = round(bf.calories + lunch.calories + snack.calories + dinner.calories, 0)
+                tot_pro = round(bf.protein_g + lunch.protein_g + snack.protein_g + dinner.protein_g, 1)
+
+                response_text = (
+                    f"Here is a nutritious, balanced full-day meal plan within your **₹{int(target_limit)}** budget:\n\n"
+                    f"🍳 **Breakfast**: {bf.name} ({bf.serving_unit}) — ₹{bf.approx_cost_inr} ({int(bf.calories)} kcal | {bf.protein_g}g Protein)\n"
+                    f"🍛 **Lunch**: {lunch.name} ({lunch.serving_unit}) — ₹{lunch.approx_cost_inr} ({int(lunch.calories)} kcal | {lunch.protein_g}g Protein)\n"
+                    f"☕ **Snack**: {snack.name} ({snack.serving_unit}) — ₹{snack.approx_cost_inr} ({int(snack.calories)} kcal | {snack.protein_g}g Protein)\n"
+                    f"🍲 **Dinner**: {dinner.name} ({dinner.serving_unit}) — ₹{dinner.approx_cost_inr} ({int(dinner.calories)} kcal | {dinner.protein_g}g Protein)\n\n"
+                    f"💰 **Total Estimated Cost**: ₹{tot_cost} / ₹{int(target_limit)} budget\n"
+                    f"📊 **Total Daily Nutrition**: {int(tot_cals)} kcal | {tot_pro}g Protein\n\n"
+                    f"This plan uses simple, widely available Indian staple foods to stay budget-friendly while fulfilling your daily energy needs."
+                )
+                retrieved_context["full_day_plan"] = [bf.name, lunch.name, snack.name, dinner.name]
+            else:
+                affordable_dishes = [f for f in valid_foods_sorted if f.approx_cost_inr <= target_limit][:4]
+                if not affordable_dishes:
+                    affordable_dishes = sorted(valid_foods_sorted, key=lambda f: f.approx_cost_inr)[:3]
+
                 dish_lines = "\n".join([
-                    f"• **{f.name}** ({f.serving_unit}): ₹{f.approx_cost_inr} | {f.calories} kcal, {f.protein_g}g Protein, {f.carbs_g}g Carbs"
+                    f"• **{f.name}** ({f.serving_unit}): ₹{f.approx_cost_inr} — {int(f.calories)} kcal, {f.protein_g}g Protein"
                     for f in affordable_dishes
                 ])
-            else:
-                fallback_dishes = sorted(valid_foods_sorted, key=lambda f: f.approx_cost_inr)[:3]
-                dish_lines = "\n".join([
-                    f"• **{f.name}** ({f.serving_unit}): ₹{f.approx_cost_inr} | {f.calories} kcal, {f.protein_g}g Protein"
-                    for f in fallback_dishes
-                ])
 
-            response_text = (
-                f"💰 **Budget & Cost Optimization**:\n\n"
-                f"You currently have **₹{round(rem_budget, 2)}** remaining today out of your daily ₹{daily_budget} budget.\n\n"
-                f"Top cost-effective dishes from our database matching your {pref} diet:\n\n"
-                f"{dish_lines}\n\n"
-                f"📊 *Pro Tip*: Combining plant proteins like lentils (Dal), sprouts, and eggs/tofu gives high nutritional value for under ₹40 per serving!"
-            )
-            retrieved_context["affordable_dishes"] = [f.name for f in affordable_dishes]
+                response_text = (
+                    f"Here are affordable meal options fitting your **₹{int(target_limit)}** budget:\n\n"
+                    f"{dish_lines}\n\n"
+                    f"💡 **Tip**: Combining staple legumes (Dal/Chana), eggs or paneer, and whole grains keeps daily meal costs affordable while meeting protein needs."
+                )
+                retrieved_context["affordable_dishes"] = [f.name for f in affordable_dishes]
 
         # --- B. Food Replacement & Ingredient Swap ---
         elif is_replacement_query:

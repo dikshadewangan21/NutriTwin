@@ -51,6 +51,7 @@ def get_daily_recommendations(
 
     meal_recommendations = {}
     interaction_records = []
+    seen_recommended_ids = []
 
     for slot in ["breakfast", "lunch", "dinner", "snack"]:
         ranked = hybrid_recommender.score_and_rank_foods(
@@ -58,13 +59,17 @@ def get_daily_recommendations(
             profile,
             target_macros,
             meal_type=slot,
-            user_feedback_history=f_hist
+            user_feedback_history=f_hist,
+            recent_food_ids=seen_recommended_ids
         )
         
         # Apply adaptive online learning adjustments
         adapted_ranked = adaptive_engine.update_item_weights(ranked, f_hist)
         
         top_3 = adapted_ranked[:3]
+        for item in top_3:
+            seen_recommended_ids.append(item["food"].id)
+
         meal_recommendations[slot] = [
             {
                 "food": FoodItemSchema.model_validate(item["food"]),

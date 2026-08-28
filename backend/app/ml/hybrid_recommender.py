@@ -85,6 +85,34 @@ class HybridRecommendationEngine:
                 
         return max(0.0, min(1.0, score))
 
+    def compute_meal_type_suitability(self, food_item, meal_type: str) -> float:
+        """Calculate meal slot suitability score [0.0 - 1.0]."""
+        cat = getattr(food_item, "category", "lunch").lower()
+        slot = (meal_type or "lunch").lower()
+
+        if cat == slot:
+            return 1.0
+
+        # Meal slot cross-compatibility
+        if slot == "breakfast":
+            if cat in ["breakfast", "snack", "beverage"]:
+                return 0.85
+            return 0.15  # Heavily penalize main courses for breakfast
+        elif slot in ["lunch", "dinner"]:
+            if cat in ["lunch", "dinner", "main_course"]:
+                return 1.0
+            elif cat in ["breakfast", "snack"]:
+                return 0.35
+            return 0.50
+        elif slot == "snack":
+            if cat in ["snack", "beverage"]:
+                return 1.0
+            elif cat == "breakfast":
+                return 0.70
+            return 0.20  # Heavily penalize heavy main courses for snack
+
+        return 0.50
+
     def compute_budget_fit(self, food_item, user_profile, meal_type):
         """Calculate budget alignment score."""
         daily_budget = user_profile.daily_budget_inr or 300.0
@@ -105,7 +133,7 @@ class HybridRecommendationEngine:
         return 1.0
 
     def score_and_rank_foods(self, food_items, user_profile, target_macros, meal_type, user_feedback_history=[], recent_food_ids=[], health_constraints={}):
-        """Score and rank candidate food items including health condition compatibility."""
+        """Score and rank candidate food items including health condition compatibility and meal type suitability."""
         scored_foods = []
         
         user_diet = user_profile.dietary_preference or "vegetarian"
@@ -128,19 +156,21 @@ class HybridRecommendationEngine:
             # Compute individual sub-scores
             macro_score = self.compute_macro_fit(food, target_macros)
             health_score = self.compute_health_condition_fit(food, health_constraints)
+            meal_suitability = self.compute_meal_type_suitability(food, meal_type)
             pref_score = self.compute_preference_score(food, user_profile, user_feedback_history)
             budget_score = self.compute_budget_fit(food, user_profile, meal_type)
             diversity_score = self.compute_diversity_score(food, recent_food_ids)
             
             region_boost = 1.0 if (food.region == "All India" or food.region == user_profile.location_region) else 0.85
 
-            # Hybrid Score Combination including Health Fit
+            # Hybrid Score Combination including Meal Type Suitability
             final_score = (
-                0.30 * macro_score +
-                0.25 * health_score +
-                0.20 * pref_score +
-                0.10 * budget_score +
-                0.10 * diversity_score +
+                0.25 * macro_score +
+                0.20 * health_score +
+                0.25 * meal_suitability +
+                0.15 * pref_score +
+                0.05 * budget_score +
+                0.05 * diversity_score +
                 0.05 * region_boost
             )
             
@@ -150,6 +180,7 @@ class HybridRecommendationEngine:
                 "breakdown": {
                     "macro_fit": round(float(macro_score), 3),
                     "health_condition_fit": round(float(health_score), 3),
+                    "meal_type_suitability": round(float(meal_suitability), 3),
                     "preference_fit": round(float(pref_score), 3),
                     "budget_fit": round(float(budget_score), 3),
                     "diversity_score": round(float(diversity_score), 3),
