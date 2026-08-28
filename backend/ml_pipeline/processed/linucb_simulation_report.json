@@ -1,7 +1,7 @@
 {
   "evaluation_type": "SYNTHETIC SIMULATION BENCHMARK — Real Interaction Volume Insufficient (< 1000)",
   "disclaimer": "This benchmark is a synthetic simulation for algorithmic validation. It does NOT represent real-world production performance metrics.",
-  "real_database_interactions": 29,
+  "real_database_interactions": 38,
   "simulation_steps": 100,
   "num_arms": 5,
   "results": {
